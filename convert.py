@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""
+Автоматический конвертер VLESS → Clash YAML
+С автоматическим переключением серверов
+"""
+
 import urllib.parse
 import yaml
 
@@ -65,22 +70,40 @@ def convert_vless_to_clash():
     print("🔄 Читаю vless_lite.txt...")
     with open('vless_lite.txt', 'r', encoding='utf-8') as f:
         lines = f.readlines()
+    
     vless_configs = []
+    russian_configs = []
+    
     for line in lines:
         line = line.strip()
         if line.startswith('vless://'):
             params = parse_vless_url(line)
             if params:
                 vless_configs.append(params)
-    print(f"📋 Найдено конфигов: {len(vless_configs)}")
+                # Отдельно собираем российские серверы
+                name = params.get('name', '')
+                if '🇷🇺' in name or 'Russia' in name:
+                    russian_configs.append(params)
+    
+    print(f"📋 Всего конфигов: {len(vless_configs)}")
+    print(f"🇷🇺 Российских: {len(russian_configs)}")
+    
     if not vless_configs:
         print("❌ Не найдено валидных VLESS конфигураций!")
         return
+    
+    # Конвертируем в Clash формат
     clash_proxies = []
     for params in vless_configs:
         proxy = vless_to_clash_proxy(params)
         clash_proxies.append(proxy)
+    
     proxy_names = [p['name'] for p in clash_proxies]
+    
+    # Имена только российских серверов
+    russian_names = [p['name'] for p in clash_proxies if '🇷🇺' in p['name']]
+    
+    # Умная конфигурация с автопереключением
     clash_config = {
         'mixed-port': 7890,
         'allow-lan': True,
@@ -98,23 +121,51 @@ def convert_vless_to_clash():
             {
                 'name': 'PROXY',
                 'type': 'select',
-                'proxies': ['Auto'] + proxy_names[:50]
+                'proxies': ['🚀 Авто', '⚡ Российские', '🛡️ Резерв', '🎮 Игры'] + proxy_names[:30]
             },
             {
-                'name': 'Auto',
+                'name': '🚀 Авто',
                 'type': 'url-test',
                 'proxies': proxy_names,
                 'url': 'http://www.gstatic.com/generate_204',
-                'interval': 300
+                'interval': 60,  # Проверка каждую минуту
+                'tolerance': 100,  # Переключится если разница >100ms
+                'lazy': False
+            },
+            {
+                'name': '⚡ Российские',
+                'type': 'url-test',
+                'proxies': russian_names if russian_names else proxy_names[:100],
+                'url': 'http://www.gstatic.com/generate_204',
+                'interval': 60,
+                'tolerance': 50
+            },
+            {
+                'name': '🛡️ Резерв',
+                'type': 'fallback',
+                'proxies': proxy_names[:50],
+                'url': 'http://www.gstatic.com/generate_204',
+                'interval': 60
+            },
+            {
+                'name': '🎮 Игры',
+                'type': 'url-test',
+                'proxies': russian_names[:50] if russian_names else proxy_names[:50],
+                'url': 'http://www.gstatic.com/generate_204',
+                'interval': 120,
+                'tolerance': 30  # Очень чувствительно к пингу для игр
             }
         ],
         'rules': [
             'MATCH,PROXY'
         ]
     }
+    
     with open('clash_config.yaml', 'w', encoding='utf-8') as f:
         yaml.dump(clash_config, f, allow_unicode=True, default_flow_style=False, sort_keys=False)
+    
     print(f"✅ Создано {len(clash_proxies)} прокси")
+    print(f"🎯 Группы: Авто, Российские, Резерв, Игры")
     print("💾 Сохранено в clash_config.yaml")
 
 if __name__ == "__main__":
