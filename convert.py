@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Автоматический конвертер VLESS → Clash YAML
-С умной маршрутизацией для YouTube и других сервисов
+С умной маршрутизацией + группа для Marvel Rivals
 """
 
 import urllib.parse
@@ -66,6 +66,14 @@ def vless_to_clash_proxy(vless_params):
             proxy['client-fingerprint'] = fp
     return proxy
 
+def is_country(name, country_codes):
+    """Проверяет содержит ли имя коды стран"""
+    name_upper = name.upper()
+    for code in country_codes:
+        if code.upper() in name_upper:
+            return True
+    return False
+
 def convert_vless_to_clash():
     print("🔄 Читаю vless_lite.txt...")
     with open('vless_lite.txt', 'r', encoding='utf-8') as f:
@@ -74,6 +82,7 @@ def convert_vless_to_clash():
     vless_configs = []
     russian_configs = []
     non_russian_configs = []
+    eu_gaming_configs = []  # Польша, Эстония, Венгрия
     
     for line in lines:
         line = line.strip()
@@ -82,15 +91,23 @@ def convert_vless_to_clash():
             if params:
                 vless_configs.append(params)
                 name = params.get('name', '')
-                # Разделяем на российские и не-российские
-                if '🇷🇺' in name or 'Russia' in name or 'RU' in name.upper():
+                
+                # Российские серверы
+                if is_country(name, ['🇷🇺', 'Russia', 'RU', 'РФ']):
                     russian_configs.append(params)
                 else:
                     non_russian_configs.append(params)
+                
+                # Серверы для Marvel Rivals (Польша, Эстония, Венгрия)
+                if is_country(name, ['🇵🇱', 'Poland', 'PL', 'Polska',
+                                     '🇪🇪', 'Estonia', 'EE', 'Eesti',
+                                     '🇭🇺', 'Hungary', 'HU', 'Hungry', 'Magyarország']):
+                    eu_gaming_configs.append(params)
     
     print(f"📋 Всего конфигов: {len(vless_configs)}")
     print(f"🇷🇺 Российских: {len(russian_configs)}")
     print(f"🌍 Не-российских: {len(non_russian_configs)}")
+    print(f"🎯 EU Gaming (PL/EE/HU): {len(eu_gaming_configs)}")
     
     if not vless_configs:
         print("❌ Не найдено валидных VLESS конфигураций!")
@@ -103,10 +120,16 @@ def convert_vless_to_clash():
         clash_proxies.append(proxy)
     
     proxy_names = [p['name'] for p in clash_proxies]
-    russian_names = [p['name'] for p in clash_proxies if '🇷🇺' in p['name']]
-    non_russian_names = [p['name'] for p in clash_proxies if '🇷🇺' not in p['name']]
+    russian_names = [p['name'] for p in clash_proxies 
+                     if is_country(p['name'], ['🇷🇺', 'Russia', 'RU'])]
+    non_russian_names = [p['name'] for p in clash_proxies 
+                         if not is_country(p['name'], ['🇷🇺', 'Russia', 'RU'])]
+    eu_gaming_names = [p['name'] for p in clash_proxies 
+                       if is_country(p['name'], ['🇵🇱', 'Poland', 'PL',
+                                                 '🇪🇪', 'Estonia', 'EE',
+                                                 '🇭🇺', 'Hungary', 'HU', 'Hungry'])]
     
-    # Умная конфигурация с раздельной маршрутизацией
+    # Умная конфигурация с группами для разных игр
     clash_config = {
         'mixed-port': 7890,
         'allow-lan': True,
@@ -124,7 +147,7 @@ def convert_vless_to_clash():
             {
                 'name': 'PROXY',
                 'type': 'select',
-                'proxies': ['🚀 Авто', '📺 YouTube', '⚡ Российские', '🌍 Зарубежные', '🎮 Игры'] + proxy_names[:30]
+                'proxies': ['🚀 Авто', '📺 YouTube', '🎮 League', '🎯 Marvel', '⚡ Российские', '🌍 Зарубежные'] + proxy_names[:30]
             },
             {
                 'name': '🚀 Авто',
@@ -144,6 +167,22 @@ def convert_vless_to_clash():
                 'tolerance': 150
             },
             {
+                'name': '🎮 League',
+                'type': 'url-test',
+                'proxies': russian_names[:50] if russian_names else proxy_names[:50],
+                'url': 'http://www.gstatic.com/generate_204',
+                'interval': 120,
+                'tolerance': 30
+            },
+            {
+                'name': '🎯 Marvel',
+                'type': 'url-test',
+                'proxies': eu_gaming_names if eu_gaming_names else non_russian_names[:50],
+                'url': 'http://www.gstatic.com/generate_204',
+                'interval': 120,
+                'tolerance': 30
+            },
+            {
                 'name': '⚡ Российские',
                 'type': 'url-test',
                 'proxies': russian_names if russian_names else proxy_names[:100],
@@ -158,14 +197,6 @@ def convert_vless_to_clash():
                 'url': 'http://www.gstatic.com/generate_204',
                 'interval': 60,
                 'tolerance': 100
-            },
-            {
-                'name': '🎮 Игры',
-                'type': 'url-test',
-                'proxies': russian_names[:50] if russian_names else proxy_names[:50],
-                'url': 'http://www.gstatic.com/generate_204',
-                'interval': 120,
-                'tolerance': 30
             }
         ],
         'rules': [
@@ -177,7 +208,7 @@ def convert_vless_to_clash():
             'DOMAIN-SUFFIX,youtu.be,📺 YouTube',
             'DOMAIN,youtube.googleapis.com,📺 YouTube',
             
-            # Другие видео-сервисы которые могут глючить с RU IP
+            # Другие видео-сервисы
             'DOMAIN-SUFFIX,twitch.tv,📺 YouTube',
             'DOMAIN-SUFFIX,netflix.com,📺 YouTube',
             'DOMAIN-SUFFIX,hulu.com,📺 YouTube',
@@ -191,8 +222,10 @@ def convert_vless_to_clash():
         yaml.dump(clash_config, f, allow_unicode=True, default_flow_style=False, sort_keys=False)
     
     print(f"✅ Создано {len(clash_proxies)} прокси")
-    print(f"🎯 Группы: Авто, YouTube (не-RU), Российские, Зарубежные, Игры")
-    print(f"📺 YouTube автоматически через не-российские серверы!")
+    print(f"🎯 Группы:")
+    print(f"   🎮 League - RU серверы ({len(russian_names[:50])} шт)")
+    print(f"   🎯 Marvel - PL/EE/HU серверы ({len(eu_gaming_names)} шт)")
+    print(f"   📺 YouTube - Не-RU серверы")
     print("💾 Сохранено в clash_config.yaml")
 
 if __name__ == "__main__":
