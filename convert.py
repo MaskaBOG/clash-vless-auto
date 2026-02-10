@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Автоматический конвертер VLESS → Clash YAML
-С отдельными группами для Польши, Эстонии и Венгрии
+С отдельными группами для Польши, Эстонии, Венгрии и Германии
 """
 
 import urllib.parse
@@ -85,6 +85,7 @@ def convert_vless_to_clash():
     poland_configs = []
     estonia_configs = []
     hungary_configs = []
+    germany_configs = []
     
     for line in lines:
         line = line.strip()
@@ -111,6 +112,10 @@ def convert_vless_to_clash():
                 # Венгрия
                 if is_country(name, ['🇭🇺', 'Hungary', 'HU', 'Hungry', 'Magyarország']):
                     hungary_configs.append(params)
+                
+                # Германия
+                if is_country(name, ['🇩🇪', 'Germany', 'DE', 'Deutschland', 'Frankfurt', 'Berlin', 'Munich']):
+                    germany_configs.append(params)
     
     print(f"📋 Всего конфигов: {len(vless_configs)}")
     print(f"🇷🇺 Российских: {len(russian_configs)}")
@@ -118,6 +123,7 @@ def convert_vless_to_clash():
     print(f"🇵🇱 Польша: {len(poland_configs)}")
     print(f"🇪🇪 Эстония: {len(estonia_configs)}")
     print(f"🇭🇺 Венгрия: {len(hungary_configs)}")
+    print(f"🇩🇪 Германия: {len(germany_configs)}")
     
     if not vless_configs:
         print("❌ Не найдено валидных VLESS конфигураций!")
@@ -140,6 +146,8 @@ def convert_vless_to_clash():
                      if is_country(p['name'], ['🇪🇪', 'Estonia', 'EE'])]
     hungary_names = [p['name'] for p in clash_proxies 
                      if is_country(p['name'], ['🇭🇺', 'Hungary', 'HU'])]
+    germany_names = [p['name'] for p in clash_proxies 
+                     if is_country(p['name'], ['🇩🇪', 'Germany', 'DE', 'Frankfurt'])]
     
     # Умная конфигурация с отдельными группами для каждой страны
     clash_config = {
@@ -159,7 +167,7 @@ def convert_vless_to_clash():
             {
                 'name': 'PROXY',
                 'type': 'select',
-                'proxies': ['🚀 Авто', '📺 YouTube', '🎮 League', '🇵🇱 Polska', '🇪🇪 Eesti', '🇭🇺 Hungary', '⚡ Российские', '🌍 Зарубежные'] + proxy_names[:30]
+                'proxies': ['🚀 Авто', '📺 YouTube', '🎮 League', '🇩🇪 Frankfurt', '🇵🇱 Polska', '🇪🇪 Eesti', '🇭🇺 Hungary', '⚡ Российские', '🌍 Зарубежные'] + proxy_names[:30]
             },
             {
                 'name': '🚀 Авто',
@@ -182,6 +190,14 @@ def convert_vless_to_clash():
                 'name': '🎮 League',
                 'type': 'url-test',
                 'proxies': russian_names[:50] if russian_names else proxy_names[:50],
+                'url': 'http://www.gstatic.com/generate_204',
+                'interval': 120,
+                'tolerance': 30
+            },
+            {
+                'name': '🇩🇪 Frankfurt',
+                'type': 'url-test',
+                'proxies': germany_names if germany_names else non_russian_names[:20],
                 'url': 'http://www.gstatic.com/generate_204',
                 'interval': 120,
                 'tolerance': 30
@@ -251,6 +267,7 @@ def convert_vless_to_clash():
     
     print(f"✅ Создано {len(clash_proxies)} прокси")
     print(f"🎯 Отдельные группы по странам:")
+    print(f"   🇩🇪 Frankfurt (Germany) - {len(germany_names)} серверов")
     print(f"   🇵🇱 Polska - {len(poland_names)} серверов")
     print(f"   🇪🇪 Eesti - {len(estonia_names)} серверов")
     print(f"   🇭🇺 Hungary - {len(hungary_names)} серверов")
