@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Автоматический конвертер VLESS → Clash YAML
-С умной маршрутизацией + группа для Marvel Rivals
+С отдельными группами для Польши, Эстонии и Венгрии
 """
 
 import urllib.parse
@@ -82,7 +82,9 @@ def convert_vless_to_clash():
     vless_configs = []
     russian_configs = []
     non_russian_configs = []
-    eu_gaming_configs = []  # Польша, Эстония, Венгрия
+    poland_configs = []
+    estonia_configs = []
+    hungary_configs = []
     
     for line in lines:
         line = line.strip()
@@ -98,16 +100,24 @@ def convert_vless_to_clash():
                 else:
                     non_russian_configs.append(params)
                 
-                # Серверы для Marvel Rivals (Польша, Эстония, Венгрия)
-                if is_country(name, ['🇵🇱', 'Poland', 'PL', 'Polska',
-                                     '🇪🇪', 'Estonia', 'EE', 'Eesti',
-                                     '🇭🇺', 'Hungary', 'HU', 'Hungry', 'Magyarország']):
-                    eu_gaming_configs.append(params)
+                # Польша
+                if is_country(name, ['🇵🇱', 'Poland', 'PL', 'Polska']):
+                    poland_configs.append(params)
+                
+                # Эстония
+                if is_country(name, ['🇪🇪', 'Estonia', 'EE', 'Eesti']):
+                    estonia_configs.append(params)
+                
+                # Венгрия
+                if is_country(name, ['🇭🇺', 'Hungary', 'HU', 'Hungry', 'Magyarország']):
+                    hungary_configs.append(params)
     
     print(f"📋 Всего конфигов: {len(vless_configs)}")
     print(f"🇷🇺 Российских: {len(russian_configs)}")
     print(f"🌍 Не-российских: {len(non_russian_configs)}")
-    print(f"🎯 EU Gaming (PL/EE/HU): {len(eu_gaming_configs)}")
+    print(f"🇵🇱 Польша: {len(poland_configs)}")
+    print(f"🇪🇪 Эстония: {len(estonia_configs)}")
+    print(f"🇭🇺 Венгрия: {len(hungary_configs)}")
     
     if not vless_configs:
         print("❌ Не найдено валидных VLESS конфигураций!")
@@ -124,12 +134,14 @@ def convert_vless_to_clash():
                      if is_country(p['name'], ['🇷🇺', 'Russia', 'RU'])]
     non_russian_names = [p['name'] for p in clash_proxies 
                          if not is_country(p['name'], ['🇷🇺', 'Russia', 'RU'])]
-    eu_gaming_names = [p['name'] for p in clash_proxies 
-                       if is_country(p['name'], ['🇵🇱', 'Poland', 'PL',
-                                                 '🇪🇪', 'Estonia', 'EE',
-                                                 '🇭🇺', 'Hungary', 'HU', 'Hungry'])]
+    poland_names = [p['name'] for p in clash_proxies 
+                    if is_country(p['name'], ['🇵🇱', 'Poland', 'PL'])]
+    estonia_names = [p['name'] for p in clash_proxies 
+                     if is_country(p['name'], ['🇪🇪', 'Estonia', 'EE'])]
+    hungary_names = [p['name'] for p in clash_proxies 
+                     if is_country(p['name'], ['🇭🇺', 'Hungary', 'HU'])]
     
-    # Умная конфигурация с группами для разных игр
+    # Умная конфигурация с отдельными группами для каждой страны
     clash_config = {
         'mixed-port': 7890,
         'allow-lan': True,
@@ -147,7 +159,7 @@ def convert_vless_to_clash():
             {
                 'name': 'PROXY',
                 'type': 'select',
-                'proxies': ['🚀 Авто', '📺 YouTube', '🎮 League', '🎯 Marvel', '⚡ Российские', '🌍 Зарубежные'] + proxy_names[:30]
+                'proxies': ['🚀 Авто', '📺 YouTube', '🎮 League', '🇵🇱 Polska', '🇪🇪 Eesti', '🇭🇺 Hungary', '⚡ Российские', '🌍 Зарубежные'] + proxy_names[:30]
             },
             {
                 'name': '🚀 Авто',
@@ -175,9 +187,25 @@ def convert_vless_to_clash():
                 'tolerance': 30
             },
             {
-                'name': '🎯 Marvel',
+                'name': '🇵🇱 Polska',
                 'type': 'url-test',
-                'proxies': eu_gaming_names if eu_gaming_names else non_russian_names[:50],
+                'proxies': poland_names if poland_names else non_russian_names[:20],
+                'url': 'http://www.gstatic.com/generate_204',
+                'interval': 120,
+                'tolerance': 30
+            },
+            {
+                'name': '🇪🇪 Eesti',
+                'type': 'url-test',
+                'proxies': estonia_names if estonia_names else non_russian_names[:20],
+                'url': 'http://www.gstatic.com/generate_204',
+                'interval': 120,
+                'tolerance': 30
+            },
+            {
+                'name': '🇭🇺 Hungary',
+                'type': 'url-test',
+                'proxies': hungary_names if hungary_names else non_russian_names[:20],
                 'url': 'http://www.gstatic.com/generate_204',
                 'interval': 120,
                 'tolerance': 30
@@ -222,9 +250,11 @@ def convert_vless_to_clash():
         yaml.dump(clash_config, f, allow_unicode=True, default_flow_style=False, sort_keys=False)
     
     print(f"✅ Создано {len(clash_proxies)} прокси")
-    print(f"🎯 Группы:")
+    print(f"🎯 Отдельные группы по странам:")
+    print(f"   🇵🇱 Polska - {len(poland_names)} серверов")
+    print(f"   🇪🇪 Eesti - {len(estonia_names)} серверов")
+    print(f"   🇭🇺 Hungary - {len(hungary_names)} серверов")
     print(f"   🎮 League - RU серверы ({len(russian_names[:50])} шт)")
-    print(f"   🎯 Marvel - PL/EE/HU серверы ({len(eu_gaming_names)} шт)")
     print(f"   📺 YouTube - Не-RU серверы")
     print("💾 Сохранено в clash_config.yaml")
 
