@@ -12396,7 +12396,6 @@ proxy-groups:
   - 🇪🇪 Eesti
   - 🇭🇺 Hungary
   - ⚡ Российские
-  - 🌍 Зарубежные
   - '🇷🇺 VK — #1'
   - '🇷🇺 VK — #2'
   - '🇷🇺 VK — #3'
@@ -12428,7 +12427,7 @@ proxy-groups:
   - '🇷🇺 VK — #29'
   - '🇷🇺 VK — #30'
 - name: 🚀 Авто
-  type: url-test
+  type: fallback
   proxies:
   - '🇷🇺 VK — #1'
   - '🇷🇺 VK — #2'
@@ -13335,12 +13334,10 @@ proxy-groups:
   - '🇺🇸 United States — #903'
   - '🇺🇸 United States — #904'
   url: https://www.google.com/generate_204
-  interval: 60
-  tolerance: 100
-  lazy: false
+  interval: 30
 - name: 📺 YouTube
-  type: url-test
-  proxies: &id001
+  type: fallback
+  proxies:
   - '🇦🇪 United Arab Emirates — #114'
   - '🇦🇪 United Arab Emirates — #115'
   - '🇦🇪 United Arab Emirates — #116'
@@ -14133,11 +14130,10 @@ proxy-groups:
   - '🇺🇸 United States — #903'
   - '🇺🇸 United States — #904'
   url: https://www.youtube.com/generate_204
-  interval: 120
-  tolerance: 150
+  interval: 60
 - name: 🎮 League
-  type: url-test
-  proxies:
+  type: fallback
+  proxies: &id001
   - '🇷🇺 VK — #1'
   - '🇷🇺 VK — #2'
   - '🇷🇺 VK — #3'
@@ -14188,11 +14184,73 @@ proxy-groups:
   - '🇷🇺 Aeza Group — #48'
   - '🇷🇺 Aeza Group — #49'
   - '🇷🇺 Baxet — #50'
-  url: https://euw.api.riotgames.com
-  interval: 120
-  tolerance: 30
+  - '🇷🇺 Baxet — #51'
+  - '🇷🇺 Baxet — #52'
+  - '🇷🇺 Baxet — #53'
+  - '🇷🇺 Baxet — #54'
+  - '🇷🇺 Baxet — #55'
+  - '🇷🇺 Beget — #56'
+  - '🇷🇺 Beget — #57'
+  - '🇷🇺 Beget — #58'
+  - '🇷🇺 Beget — #59'
+  - '🇷🇺 CDNvideo — #60'
+  - '🇷🇺 CDNvideo — #61'
+  - '🇷🇺 CDNvideo — #62'
+  - '🇷🇺 CDNvideo — #63'
+  - '🇷🇺 CDNvideo — #64'
+  - '🇷🇺 CDNvideo — #65'
+  - '🇷🇺 cloud.ru — #66'
+  - '🇷🇺 cloud.ru — #67'
+  - '🇷🇺 Delta — #68'
+  - '🇷🇺 Delta — #69'
+  - '🇷🇺 Delta — #70'
+  - '🇷🇺 Delta — #71'
+  - '🇷🇺 Delta — #72'
+  - '🇷🇺 Selectel — #73'
+  - '🇷🇺 Selectel — #74'
+  - '🇷🇺 Selectel — #75'
+  - '🇷🇺 Selectel — #76'
+  - '🇷🇺 Selectel — #77'
+  - '🇷🇺 Selectel — #78'
+  - '🇷🇺 Selectel — #79'
+  - '🇷🇺 Selectel — #80'
+  - '🇷🇺 Selectel — #81'
+  - '🇷🇺 Selectel — #82'
+  - '🇷🇺 Selectel — #83'
+  - '🇷🇺 Selectel — #84'
+  - '🇷🇺 Selectel — #85'
+  - '🇷🇺 Selectel — #86'
+  - '🇷🇺 Selectel — #87'
+  - '🇷🇺 Selectel — #88'
+  - '🇷🇺 Selectel — #89'
+  - '🇷🇺 Selectel — #90'
+  - '🇷🇺 Selectel — #91'
+  - '🇷🇺 Selectel — #92'
+  - '🇷🇺 Selectel — #93'
+  - '🇷🇺 Selectel — #94'
+  - '🇷🇺 Selectel — #95'
+  - '🇷🇺 Selectel — #96'
+  - '🇷🇺 Selectel — #97'
+  - '🇷🇺 Selectel — #98'
+  - '🇷🇺 Selectel — #99'
+  - '🇷🇺 Selectel — #100'
+  - '🇷🇺 Selectel — #101'
+  - '🇷🇺 Selectel — #102'
+  - '🇷🇺 Selectel — #103'
+  - '🇷🇺 Timeweb — #104'
+  - '🇷🇺 Timeweb — #105'
+  - '🇷🇺 Timeweb — #106'
+  - '🇷🇺 Timeweb — #107'
+  - '🇷🇺 Timeweb — #108'
+  - '🇷🇺 Timeweb — #109'
+  - '🇷🇺 Timeweb — #110'
+  - '🇷🇺 Timeweb — #111'
+  - '🇷🇺 Timeweb — #112'
+  - '🇷🇺 Timeweb — #113'
+  url: https://www.google.com/generate_204
+  interval: 30
 - name: 🇩🇪 Frankfurt
-  type: url-test
+  type: fallback
   proxies:
   - '🇷🇺 Yandex — #32'
   - '🇷🇺 Yandex — #33'
@@ -14287,10 +14345,9 @@ proxy-groups:
   - '🇸🇪 Sweden — #811'
   - '🇸🇪 Sweden — #812'
   url: https://cloudflare.com/cdn-cgi/trace
-  interval: 120
-  tolerance: 30
+  interval: 30
 - name: 🇵🇱 Polska
-  type: url-test
+  type: fallback
   proxies:
   - '🇵🇱 Poland — #656'
   - '🇵🇱 Poland — #657'
@@ -14447,10 +14504,9 @@ proxy-groups:
   - '🇵🇱 Poland — #808'
   - '🇵🇱 Poland — #809'
   url: https://cloudflare.com/cdn-cgi/trace
-  interval: 120
-  tolerance: 30
+  interval: 30
 - name: 🇪🇪 Eesti
-  type: url-test
+  type: fallback
   proxies:
   - '🇪🇪 Estonia — #246'
   - '🇪🇪 Estonia — #247'
@@ -14498,10 +14554,9 @@ proxy-groups:
   - '🇪🇪 Estonia — #289'
   - '🇪🇪 Estonia — #290'
   url: https://cloudflare.com/cdn-cgi/trace
-  interval: 120
-  tolerance: 30
+  interval: 30
 - name: 🇭🇺 Hungary
-  type: url-test
+  type: fallback
   proxies:
   - '🇭🇺 Hungary — #443'
   - '🇭🇺 Hungary — #444'
@@ -14578,133 +14633,12 @@ proxy-groups:
   - '🇱🇹 Lithuania — #583'
   - '🇱🇹 Lithuania — #584'
   url: https://cloudflare.com/cdn-cgi/trace
-  interval: 120
-  tolerance: 30
+  interval: 30
 - name: ⚡ Российские
-  type: url-test
-  proxies:
-  - '🇷🇺 VK — #1'
-  - '🇷🇺 VK — #2'
-  - '🇷🇺 VK — #3'
-  - '🇷🇺 VK — #4'
-  - '🇷🇺 VK — #5'
-  - '🇷🇺 VK — #6'
-  - '🇷🇺 VK — #7'
-  - '🇷🇺 VK — #8'
-  - '🇷🇺 VK — #9'
-  - '🇷🇺 VK — #10'
-  - '🇷🇺 VK — #11'
-  - '🇷🇺 VK — #12'
-  - '🇷🇺 VK — #13'
-  - '🇷🇺 VK — #14'
-  - '🇷🇺 VK — #15'
-  - '🇷🇺 VK — #16'
-  - '🇷🇺 VK — #17'
-  - '🇷🇺 VK — #18'
-  - '🇷🇺 VK — #19'
-  - '🇷🇺 VK — #20'
-  - '🇷🇺 VK — #21'
-  - '🇷🇺 VK — #22'
-  - '🇷🇺 VK — #23'
-  - '🇷🇺 VK — #24'
-  - '🇷🇺 VK — #25'
-  - '🇷🇺 VK — #26'
-  - '🇷🇺 VK — #27'
-  - '🇷🇺 VK — #28'
-  - '🇷🇺 VK — #29'
-  - '🇷🇺 VK — #30'
-  - '🇷🇺 VK — #31'
-  - '🇷🇺 Yandex — #32'
-  - '🇷🇺 Yandex — #33'
-  - '🇷🇺 Yandex — #34'
-  - '🇷🇺 Yandex — #35'
-  - '🇷🇺 Yandex — #36'
-  - '🇷🇺 Yandex — #37'
-  - '🇷🇺 Yandex — #38'
-  - '🇷🇺 Yandex — #39'
-  - '🇷🇺 Yandex — #40'
-  - '🇷🇺 Yandex — #41'
-  - '🇷🇺 4vps.su — #42'
-  - '🇷🇺 4vps.su — #43'
-  - '🇷🇺 4vps.su — #44'
-  - '🇷🇺 4vps.su — #45'
-  - '🇷🇺 Aeza Group — #46'
-  - '🇷🇺 Aeza Group — #47'
-  - '🇷🇺 Aeza Group — #48'
-  - '🇷🇺 Aeza Group — #49'
-  - '🇷🇺 Baxet — #50'
-  - '🇷🇺 Baxet — #51'
-  - '🇷🇺 Baxet — #52'
-  - '🇷🇺 Baxet — #53'
-  - '🇷🇺 Baxet — #54'
-  - '🇷🇺 Baxet — #55'
-  - '🇷🇺 Beget — #56'
-  - '🇷🇺 Beget — #57'
-  - '🇷🇺 Beget — #58'
-  - '🇷🇺 Beget — #59'
-  - '🇷🇺 CDNvideo — #60'
-  - '🇷🇺 CDNvideo — #61'
-  - '🇷🇺 CDNvideo — #62'
-  - '🇷🇺 CDNvideo — #63'
-  - '🇷🇺 CDNvideo — #64'
-  - '🇷🇺 CDNvideo — #65'
-  - '🇷🇺 cloud.ru — #66'
-  - '🇷🇺 cloud.ru — #67'
-  - '🇷🇺 Delta — #68'
-  - '🇷🇺 Delta — #69'
-  - '🇷🇺 Delta — #70'
-  - '🇷🇺 Delta — #71'
-  - '🇷🇺 Delta — #72'
-  - '🇷🇺 Selectel — #73'
-  - '🇷🇺 Selectel — #74'
-  - '🇷🇺 Selectel — #75'
-  - '🇷🇺 Selectel — #76'
-  - '🇷🇺 Selectel — #77'
-  - '🇷🇺 Selectel — #78'
-  - '🇷🇺 Selectel — #79'
-  - '🇷🇺 Selectel — #80'
-  - '🇷🇺 Selectel — #81'
-  - '🇷🇺 Selectel — #82'
-  - '🇷🇺 Selectel — #83'
-  - '🇷🇺 Selectel — #84'
-  - '🇷🇺 Selectel — #85'
-  - '🇷🇺 Selectel — #86'
-  - '🇷🇺 Selectel — #87'
-  - '🇷🇺 Selectel — #88'
-  - '🇷🇺 Selectel — #89'
-  - '🇷🇺 Selectel — #90'
-  - '🇷🇺 Selectel — #91'
-  - '🇷🇺 Selectel — #92'
-  - '🇷🇺 Selectel — #93'
-  - '🇷🇺 Selectel — #94'
-  - '🇷🇺 Selectel — #95'
-  - '🇷🇺 Selectel — #96'
-  - '🇷🇺 Selectel — #97'
-  - '🇷🇺 Selectel — #98'
-  - '🇷🇺 Selectel — #99'
-  - '🇷🇺 Selectel — #100'
-  - '🇷🇺 Selectel — #101'
-  - '🇷🇺 Selectel — #102'
-  - '🇷🇺 Selectel — #103'
-  - '🇷🇺 Timeweb — #104'
-  - '🇷🇺 Timeweb — #105'
-  - '🇷🇺 Timeweb — #106'
-  - '🇷🇺 Timeweb — #107'
-  - '🇷🇺 Timeweb — #108'
-  - '🇷🇺 Timeweb — #109'
-  - '🇷🇺 Timeweb — #110'
-  - '🇷🇺 Timeweb — #111'
-  - '🇷🇺 Timeweb — #112'
-  - '🇷🇺 Timeweb — #113'
-  url: https://yandex.ru/internet
-  interval: 60
-  tolerance: 50
-- name: 🌍 Зарубежные
-  type: url-test
+  type: fallback
   proxies: *id001
-  url: https://www.google.com/generate_204
-  interval: 60
-  tolerance: 100
+  url: https://yandex.ru/internet
+  interval: 30
 rules:
 - DOMAIN-SUFFIX,youtube.com,📺 YouTube
 - DOMAIN-SUFFIX,googlevideo.com,📺 YouTube
