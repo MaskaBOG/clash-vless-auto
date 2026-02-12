@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Автоматический конвертер VLESS → Clash YAML
-С отдельными группами для Польши, Эстонии, Венгрии и Германии
+С оптимизированными URL для проверки пинга
 """
 
 import urllib.parse
@@ -95,25 +95,20 @@ def convert_vless_to_clash():
                 vless_configs.append(params)
                 name = params.get('name', '')
                 
-                # Российские серверы
                 if is_country(name, ['🇷🇺', 'Russia', 'RU', 'РФ']):
                     russian_configs.append(params)
                 else:
                     non_russian_configs.append(params)
                 
-                # Польша
                 if is_country(name, ['🇵🇱', 'Poland', 'PL', 'Polska']):
                     poland_configs.append(params)
                 
-                # Эстония
                 if is_country(name, ['🇪🇪', 'Estonia', 'EE', 'Eesti']):
                     estonia_configs.append(params)
                 
-                # Венгрия
                 if is_country(name, ['🇭🇺', 'Hungary', 'HU', 'Hungry', 'Magyarország']):
                     hungary_configs.append(params)
                 
-                # Германия
                 if is_country(name, ['🇩🇪', 'Germany', 'DE', 'Deutschland', 'Frankfurt', 'Berlin', 'Munich']):
                     germany_configs.append(params)
     
@@ -129,7 +124,6 @@ def convert_vless_to_clash():
         print("❌ Не найдено валидных VLESS конфигураций!")
         return
     
-    # Конвертируем в Clash формат
     clash_proxies = []
     for params in vless_configs:
         proxy = vless_to_clash_proxy(params)
@@ -149,7 +143,7 @@ def convert_vless_to_clash():
     germany_names = [p['name'] for p in clash_proxies 
                      if is_country(p['name'], ['🇩🇪', 'Germany', 'DE', 'Frankfurt'])]
     
-    # Умная конфигурация с отдельными группами для каждой страны
+    # ОПТИМИЗИРОВАННЫЕ URL ДЛЯ РАЗНЫХ ЦЕЛЕЙ
     clash_config = {
         'mixed-port': 7890,
         'allow-lan': True,
@@ -173,7 +167,7 @@ def convert_vless_to_clash():
                 'name': '🚀 Авто',
                 'type': 'url-test',
                 'proxies': proxy_names,
-                'url': 'http://www.gstatic.com/generate_204',
+                'url': 'https://www.google.com/generate_204',  # Google (быстро, точно)
                 'interval': 60,
                 'tolerance': 100,
                 'lazy': False
@@ -182,7 +176,7 @@ def convert_vless_to_clash():
                 'name': '📺 YouTube',
                 'type': 'url-test',
                 'proxies': non_russian_names if non_russian_names else proxy_names,
-                'url': 'http://www.gstatic.com/generate_204',
+                'url': 'https://www.youtube.com/generate_204',  # YouTube (точная проверка)
                 'interval': 120,
                 'tolerance': 150
             },
@@ -190,7 +184,7 @@ def convert_vless_to_clash():
                 'name': '🎮 League',
                 'type': 'url-test',
                 'proxies': russian_names[:50] if russian_names else proxy_names[:50],
-                'url': 'http://www.gstatic.com/generate_204',
+                'url': 'https://euw.api.riotgames.com',  # Riot Games API (игровой пинг!)
                 'interval': 120,
                 'tolerance': 30
             },
@@ -198,7 +192,7 @@ def convert_vless_to_clash():
                 'name': '🇩🇪 Frankfurt',
                 'type': 'url-test',
                 'proxies': germany_names if germany_names else non_russian_names[:20],
-                'url': 'http://www.gstatic.com/generate_204',
+                'url': 'https://cloudflare.com/cdn-cgi/trace',  # CloudFlare (точно, быстро)
                 'interval': 120,
                 'tolerance': 30
             },
@@ -206,7 +200,7 @@ def convert_vless_to_clash():
                 'name': '🇵🇱 Polska',
                 'type': 'url-test',
                 'proxies': poland_names if poland_names else non_russian_names[:20],
-                'url': 'http://www.gstatic.com/generate_204',
+                'url': 'https://cloudflare.com/cdn-cgi/trace',
                 'interval': 120,
                 'tolerance': 30
             },
@@ -214,7 +208,7 @@ def convert_vless_to_clash():
                 'name': '🇪🇪 Eesti',
                 'type': 'url-test',
                 'proxies': estonia_names if estonia_names else non_russian_names[:20],
-                'url': 'http://www.gstatic.com/generate_204',
+                'url': 'https://cloudflare.com/cdn-cgi/trace',
                 'interval': 120,
                 'tolerance': 30
             },
@@ -222,7 +216,7 @@ def convert_vless_to_clash():
                 'name': '🇭🇺 Hungary',
                 'type': 'url-test',
                 'proxies': hungary_names if hungary_names else non_russian_names[:20],
-                'url': 'http://www.gstatic.com/generate_204',
+                'url': 'https://cloudflare.com/cdn-cgi/trace',
                 'interval': 120,
                 'tolerance': 30
             },
@@ -230,7 +224,7 @@ def convert_vless_to_clash():
                 'name': '⚡ Российские',
                 'type': 'url-test',
                 'proxies': russian_names if russian_names else proxy_names[:100],
-                'url': 'http://www.gstatic.com/generate_204',
+                'url': 'https://yandex.ru/internet',  # Yandex (для RU серверов)
                 'interval': 60,
                 'tolerance': 50
             },
@@ -238,26 +232,21 @@ def convert_vless_to_clash():
                 'name': '🌍 Зарубежные',
                 'type': 'url-test',
                 'proxies': non_russian_names if non_russian_names else proxy_names[:100],
-                'url': 'http://www.gstatic.com/generate_204',
+                'url': 'https://www.google.com/generate_204',
                 'interval': 60,
                 'tolerance': 100
             }
         ],
         'rules': [
-            # YouTube и Google сервисы - только через не-российские серверы
             'DOMAIN-SUFFIX,youtube.com,📺 YouTube',
             'DOMAIN-SUFFIX,googlevideo.com,📺 YouTube',
             'DOMAIN-SUFFIX,ytimg.com,📺 YouTube',
             'DOMAIN-SUFFIX,ggpht.com,📺 YouTube',
             'DOMAIN-SUFFIX,youtu.be,📺 YouTube',
             'DOMAIN,youtube.googleapis.com,📺 YouTube',
-            
-            # Другие видео-сервисы
             'DOMAIN-SUFFIX,twitch.tv,📺 YouTube',
             'DOMAIN-SUFFIX,netflix.com,📺 YouTube',
             'DOMAIN-SUFFIX,hulu.com,📺 YouTube',
-            
-            # Всё остальное - через умный выбор
             'MATCH,PROXY'
         ]
     }
@@ -266,13 +255,11 @@ def convert_vless_to_clash():
         yaml.dump(clash_config, f, allow_unicode=True, default_flow_style=False, sort_keys=False)
     
     print(f"✅ Создано {len(clash_proxies)} прокси")
-    print(f"🎯 Отдельные группы по странам:")
-    print(f"   🇩🇪 Frankfurt (Germany) - {len(germany_names)} серверов")
-    print(f"   🇵🇱 Polska - {len(poland_names)} серверов")
-    print(f"   🇪🇪 Eesti - {len(estonia_names)} серверов")
-    print(f"   🇭🇺 Hungary - {len(hungary_names)} серверов")
-    print(f"   🎮 League - RU серверы ({len(russian_names[:50])} шт)")
-    print(f"   📺 YouTube - Не-RU серверы")
+    print(f"🎯 Оптимизированные URL для проверки пинга:")
+    print(f"   🎮 League - Riot Games API (игровой пинг)")
+    print(f"   📺 YouTube - YouTube API")
+    print(f"   🇩🇪🇵🇱🇪🇪🇭🇺 - CloudFlare (точно)")
+    print(f"   ⚡ Российские - Yandex")
     print("💾 Сохранено в clash_config.yaml")
 
 if __name__ == "__main__":
