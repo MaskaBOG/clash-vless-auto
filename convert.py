@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Автоматический конвертер VLESS → Clash YAML
-С оптимизированными URL для проверки пинга
+ИСПРАВЛЕННАЯ ВЕРСИЯ - фикс автопереключения и фильтрации
 """
 
 import urllib.parse
@@ -66,13 +65,37 @@ def vless_to_clash_proxy(vless_params):
             proxy['client-fingerprint'] = fp
     return proxy
 
-def is_country(name, country_codes):
-    """Проверяет содержит ли имя коды стран"""
+def is_russia(name):
+    """Проверяет российский ли сервер"""
+    ru_keywords = ['🇷🇺', 'RUSSIA', 'RU', 'РФ', 'VK', 'YANDEX', 'SELECTEL', 
+                   'BEGET', 'DELTA', '4VPS', 'AEZA', 'TIMEWEB']
     name_upper = name.upper()
-    for code in country_codes:
-        if code.upper() in name_upper:
-            return True
-    return False
+    return any(kw in name_upper for kw in ru_keywords)
+
+def is_germany(name):
+    """Проверяет немецкий ли сервер"""
+    de_keywords = ['🇩🇪', 'GERMANY', 'DE', 'DEUTSCHLAND', 'FRANKFURT', 
+                   'BERLIN', 'MUNICH', 'HETZNER']
+    name_upper = name.upper()
+    return any(kw in name_upper for kw in de_keywords)
+
+def is_poland(name):
+    """Проверяет польский ли сервер"""
+    pl_keywords = ['🇵🇱', 'POLAND', 'PL', 'POLSKA', 'WARSAW']
+    name_upper = name.upper()
+    return any(kw in name_upper for kw in pl_keywords)
+
+def is_estonia(name):
+    """Проверяет эстонский ли сервер"""
+    ee_keywords = ['🇪🇪', 'ESTONIA', 'EE', 'EESTI', 'TALLINN']
+    name_upper = name.upper()
+    return any(kw in name_upper for kw in ee_keywords)
+
+def is_hungary(name):
+    """Проверяет венгерский ли сервер"""
+    hu_keywords = ['🇭🇺', 'HUNGARY', 'HU', 'HUNGRY', 'MAGYAR', 'BUDAPEST']
+    name_upper = name.upper()
+    return any(kw in name_upper for kw in hu_keywords)
 
 def convert_vless_to_clash():
     print("🔄 Читаю vless_lite.txt...")
@@ -82,10 +105,10 @@ def convert_vless_to_clash():
     vless_configs = []
     russian_configs = []
     non_russian_configs = []
+    germany_configs = []
     poland_configs = []
     estonia_configs = []
     hungary_configs = []
-    germany_configs = []
     
     for line in lines:
         line = line.strip()
@@ -95,30 +118,30 @@ def convert_vless_to_clash():
                 vless_configs.append(params)
                 name = params.get('name', '')
                 
-                if is_country(name, ['🇷🇺', 'Russia', 'RU', 'РФ']):
+                if is_russia(name):
                     russian_configs.append(params)
                 else:
                     non_russian_configs.append(params)
                 
-                if is_country(name, ['🇵🇱', 'Poland', 'PL', 'Polska']):
+                if is_germany(name):
+                    germany_configs.append(params)
+                
+                if is_poland(name):
                     poland_configs.append(params)
                 
-                if is_country(name, ['🇪🇪', 'Estonia', 'EE', 'Eesti']):
+                if is_estonia(name):
                     estonia_configs.append(params)
                 
-                if is_country(name, ['🇭🇺', 'Hungary', 'HU', 'Hungry', 'Magyarország']):
+                if is_hungary(name):
                     hungary_configs.append(params)
-                
-                if is_country(name, ['🇩🇪', 'Germany', 'DE', 'Deutschland', 'Frankfurt', 'Berlin', 'Munich']):
-                    germany_configs.append(params)
     
     print(f"📋 Всего конфигов: {len(vless_configs)}")
     print(f"🇷🇺 Российских: {len(russian_configs)}")
     print(f"🌍 Не-российских: {len(non_russian_configs)}")
+    print(f"🇩🇪 Германия: {len(germany_configs)}")
     print(f"🇵🇱 Польша: {len(poland_configs)}")
     print(f"🇪🇪 Эстония: {len(estonia_configs)}")
     print(f"🇭🇺 Венгрия: {len(hungary_configs)}")
-    print(f"🇩🇪 Германия: {len(germany_configs)}")
     
     if not vless_configs:
         print("❌ Не найдено валидных VLESS конфигураций!")
@@ -130,20 +153,14 @@ def convert_vless_to_clash():
         clash_proxies.append(proxy)
     
     proxy_names = [p['name'] for p in clash_proxies]
-    russian_names = [p['name'] for p in clash_proxies 
-                     if is_country(p['name'], ['🇷🇺', 'Russia', 'RU'])]
-    non_russian_names = [p['name'] for p in clash_proxies 
-                         if not is_country(p['name'], ['🇷🇺', 'Russia', 'RU'])]
-    poland_names = [p['name'] for p in clash_proxies 
-                    if is_country(p['name'], ['🇵🇱', 'Poland', 'PL'])]
-    estonia_names = [p['name'] for p in clash_proxies 
-                     if is_country(p['name'], ['🇪🇪', 'Estonia', 'EE'])]
-    hungary_names = [p['name'] for p in clash_proxies 
-                     if is_country(p['name'], ['🇭🇺', 'Hungary', 'HU'])]
-    germany_names = [p['name'] for p in clash_proxies 
-                     if is_country(p['name'], ['🇩🇪', 'Germany', 'DE', 'Frankfurt'])]
+    russian_names = [p['name'] for p in clash_proxies if is_russia(p['name'])]
+    non_russian_names = [p['name'] for p in clash_proxies if not is_russia(p['name'])]
+    germany_names = [p['name'] for p in clash_proxies if is_germany(p['name'])]
+    poland_names = [p['name'] for p in clash_proxies if is_poland(p['name'])]
+    estonia_names = [p['name'] for p in clash_proxies if is_estonia(p['name'])]
+    hungary_names = [p['name'] for p in clash_proxies if is_hungary(p['name'])]
     
-    # ОПТИМИЗИРОВАННЫЕ URL ДЛЯ РАЗНЫХ ЦЕЛЕЙ
+    # ФИКС: используем fallback вместо url-test для более стабильной работы
     clash_config = {
         'mixed-port': 7890,
         'allow-lan': True,
@@ -161,80 +178,63 @@ def convert_vless_to_clash():
             {
                 'name': 'PROXY',
                 'type': 'select',
-                'proxies': ['🚀 Авто', '📺 YouTube', '🎮 League', '🇩🇪 Frankfurt', '🇵🇱 Polska', '🇪🇪 Eesti', '🇭🇺 Hungary', '⚡ Российские', '🌍 Зарубежные'] + proxy_names[:30]
+                'proxies': ['🚀 Авто', '📺 YouTube', '🎮 League', '🇩🇪 Frankfurt', '🇵🇱 Polska', '🇪🇪 Eesti', '🇭🇺 Hungary', '⚡ Российские'] + proxy_names[:30]
             },
             {
                 'name': '🚀 Авто',
-                'type': 'url-test',
+                'type': 'fallback',  # Изменено на fallback для надежности
                 'proxies': proxy_names,
-                'url': 'https://www.google.com/generate_204',  # Google (быстро, точно)
-                'interval': 60,
-                'tolerance': 100,
-                'lazy': False
+                'url': 'https://www.google.com/generate_204',
+                'interval': 30,  # Проверка каждые 30 секунд
             },
             {
                 'name': '📺 YouTube',
-                'type': 'url-test',
+                'type': 'fallback',
                 'proxies': non_russian_names if non_russian_names else proxy_names,
-                'url': 'https://www.youtube.com/generate_204',  # YouTube (точная проверка)
-                'interval': 120,
-                'tolerance': 150
+                'url': 'https://www.youtube.com/generate_204',
+                'interval': 60,
             },
             {
                 'name': '🎮 League',
-                'type': 'url-test',
-                'proxies': russian_names[:50] if russian_names else proxy_names[:50],
-                'url': 'https://euw.api.riotgames.com',  # Riot Games API (игровой пинг!)
-                'interval': 120,
-                'tolerance': 30
+                'type': 'fallback',  # fallback более надежен
+                'proxies': russian_names if russian_names else proxy_names[:50],
+                'url': 'https://www.google.com/generate_204',
+                'interval': 30,
             },
             {
                 'name': '🇩🇪 Frankfurt',
-                'type': 'url-test',
-                'proxies': germany_names if germany_names else non_russian_names[:20],
-                'url': 'https://cloudflare.com/cdn-cgi/trace',  # CloudFlare (точно, быстро)
-                'interval': 120,
-                'tolerance': 30
+                'type': 'fallback',
+                'proxies': germany_names if germany_names else non_russian_names[:30],
+                'url': 'https://cloudflare.com/cdn-cgi/trace',
+                'interval': 30,
             },
             {
                 'name': '🇵🇱 Polska',
-                'type': 'url-test',
-                'proxies': poland_names if poland_names else non_russian_names[:20],
+                'type': 'fallback',
+                'proxies': poland_names if poland_names else non_russian_names[:30],
                 'url': 'https://cloudflare.com/cdn-cgi/trace',
-                'interval': 120,
-                'tolerance': 30
+                'interval': 30,
             },
             {
                 'name': '🇪🇪 Eesti',
-                'type': 'url-test',
-                'proxies': estonia_names if estonia_names else non_russian_names[:20],
+                'type': 'fallback',
+                'proxies': estonia_names if estonia_names else non_russian_names[:30],
                 'url': 'https://cloudflare.com/cdn-cgi/trace',
-                'interval': 120,
-                'tolerance': 30
+                'interval': 30,
             },
             {
                 'name': '🇭🇺 Hungary',
-                'type': 'url-test',
-                'proxies': hungary_names if hungary_names else non_russian_names[:20],
+                'type': 'fallback',
+                'proxies': hungary_names if hungary_names else non_russian_names[:30],
                 'url': 'https://cloudflare.com/cdn-cgi/trace',
-                'interval': 120,
-                'tolerance': 30
+                'interval': 30,
             },
             {
                 'name': '⚡ Российские',
-                'type': 'url-test',
-                'proxies': russian_names if russian_names else proxy_names[:100],
-                'url': 'https://yandex.ru/internet',  # Yandex (для RU серверов)
-                'interval': 60,
-                'tolerance': 50
-            },
-            {
-                'name': '🌍 Зарубежные',
-                'type': 'url-test',
-                'proxies': non_russian_names if non_russian_names else proxy_names[:100],
-                'url': 'https://www.google.com/generate_204',
-                'interval': 60,
-                'tolerance': 100
+                'type': 'fallback',
+                'proxies': russian_names if russian_names else proxy_names[:50],
+                'url': 'https://yandex.ru/internet',
+                'interval': 30,
             }
         ],
         'rules': [
@@ -255,11 +255,18 @@ def convert_vless_to_clash():
         yaml.dump(clash_config, f, allow_unicode=True, default_flow_style=False, sort_keys=False)
     
     print(f"✅ Создано {len(clash_proxies)} прокси")
-    print(f"🎯 Оптимизированные URL для проверки пинга:")
-    print(f"   🎮 League - Riot Games API (игровой пинг)")
-    print(f"   📺 YouTube - YouTube API")
-    print(f"   🇩🇪🇵🇱🇪🇪🇭🇺 - CloudFlare (точно)")
-    print(f"   ⚡ Российские - Yandex")
+    print(f"🔧 ИСПРАВЛЕНИЯ:")
+    print(f"   • Тип изменен на 'fallback' (надежнее)")
+    print(f"   • Проверка каждые 30 секунд (чаще)")
+    print(f"   • Улучшена фильтрация серверов")
+    
+    if len(germany_names) == 0:
+        print(f"⚠️  ВНИМАНИЕ: Немецких серверов НЕ НАЙДЕНО!")
+        print(f"   Frankfurt будет использовать любые НЕ-RU серверы")
+    
+    if len(russian_names) < 10:
+        print(f"⚠️  ВНИМАНИЕ: Мало российских серверов ({len(russian_names)})")
+    
     print("💾 Сохранено в clash_config.yaml")
 
 if __name__ == "__main__":
