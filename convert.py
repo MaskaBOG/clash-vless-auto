@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-РАДИКАЛЬНЫЙ ФИКС - пропускаем серверы с ПУСТЫМ short-id
+ФИНАЛЬНЫЙ ФИКС - конвертируем short-id в строку + пропускаем битые
 """
 
 import urllib.parse
@@ -42,11 +42,13 @@ def parse_vless_url(vless_url):
 
 def is_valid_short_id(sid):
     """СУПЕР-СТРОГАЯ проверка short-id"""
-    # ПУСТОЙ = НЕВАЛИДНЫЙ! ПРОПУСКАЕМ!
-    if not sid or not sid.strip():
-        return False  # ← ИЗМЕНЕНО! Пустой = невалидный!
-    
+    # Конвертируем в строку если это число!
+    sid = str(sid) if sid is not None else ''
     sid = sid.strip()
+    
+    # Пустой = невалидный
+    if not sid:
+        return False
     
     # ТОЛЬКО hex символы
     if not re.match(r'^[0-9a-fA-F]+$', sid):
@@ -59,18 +61,17 @@ def is_valid_short_id(sid):
     return True
 
 def vless_to_clash_proxy(vless_params):
-    """Конвертирует VLESS в Clash, пропускает битые"""
+    """Конвертирует VLESS в Clash"""
     try:
         security = vless_params.get('security', '')
         
         if security == 'reality':
             sid = vless_params.get('sid', '')
             
-            # РАДИКАЛЬНАЯ ВАЛИДАЦИЯ:
-            # Если short-id ПУСТОЙ или БИТЫЙ - ПРОПУСКАЕМ!
+            # Валидация
             if not is_valid_short_id(sid):
                 name_short = vless_params['name'][:60]
-                print(f"⚠️  SKIP: {name_short} | sid='{sid}' (пустой или битый)")
+                print(f"⚠️  SKIP: {name_short} | sid='{sid}'")
                 return None
         
         proxy = {
@@ -87,12 +88,12 @@ def vless_to_clash_proxy(vless_params):
             proxy['tls'] = True
             proxy['servername'] = vless_params.get('sni', '')
             
-            sid = vless_params.get('sid', '').strip()
+            # КРИТИЧЕСКИЙ ФИКС: Всегда конвертируем в строку!
+            sid = str(vless_params.get('sid', '')).strip()
             
-            # Добавляем short-id (он уже валидирован выше)
             proxy['reality-opts'] = {
                 'public-key': vless_params.get('pbk', ''),
-                'short-id': sid,
+                'short-id': sid,  # ← ГАРАНТИРОВАННО строка!
             }
             
             flow = vless_params.get('flow', '')
@@ -159,8 +160,8 @@ def convert_vless_to_clash():
         print("❌ Не найдено валидных VLESS конфигураций!")
         return
     
-    # Конвертация с РАДИКАЛЬНОЙ валидацией
-    print("🔍 Валидация (пропускаем пустые short-id)...")
+    # Конвертация
+    print("🔍 Валидация...")
     clash_proxies = []
     skipped = 0
     
@@ -329,11 +330,12 @@ def convert_vless_to_clash():
         ]
     }
     
+    # КРИТИЧЕСКИЙ ФИКС: Используем default_flow_style=False + представитель строк
     with open('clash_config.yaml', 'w', encoding='utf-8') as f:
-        yaml.dump(clash_config, f, allow_unicode=True, default_flow_style=False, sort_keys=False)
+        yaml.dump(clash_config, f, allow_unicode=True, default_flow_style=False, sort_keys=False, default_style="'")
     
     print(f"💾 Сохранено: clash_config.yaml")
-    print(f"🔥 РАДИКАЛЬНЫЙ ФИКС: Пустые short-id УДАЛЕНЫ!")
+    print(f"🔥 ФИКС: short-id ВСЕГДА строка (не число)!")
     print(f"✅ ГОТОВО!")
 
 if __name__ == "__main__":
