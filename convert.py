@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Автоматический конвертер VLESS → Clash YAML
-С валидацией short-id и исключением RU из EU групп
+ФИНАЛЬНАЯ ВЕРСИЯ с фиксом пустого short-id
 """
 
 import urllib.parse
@@ -88,10 +88,17 @@ def vless_to_clash_proxy(vless_params):
             
             sid = vless_params.get('sid', '').strip()
             
-            proxy['reality-opts'] = {
+            # КРИТИЧЕСКИЙ ФИКС: Создаем reality-opts
+            reality_opts = {
                 'public-key': vless_params.get('pbk', ''),
-                'short-id': sid,
             }
+            
+            # Добавляем short-id ТОЛЬКО если он НЕ пустой!
+            # Пустой short-id вообще не добавляем в конфиг!
+            if sid:
+                reality_opts['short-id'] = sid
+            
+            proxy['reality-opts'] = reality_opts
             
             flow = vless_params.get('flow', '')
             if flow:
@@ -336,6 +343,7 @@ def convert_vless_to_clash():
         yaml.dump(clash_config, f, allow_unicode=True, default_flow_style=False, sort_keys=False)
     
     print(f"💾 Сохранено: clash_config.yaml")
+    print(f"🔧 ФИКС: Пустой short-id НЕ добавляется в конфиг!")
     print(f"✅ ГОТОВО!")
 
 if __name__ == "__main__":
