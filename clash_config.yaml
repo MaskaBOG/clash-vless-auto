@@ -1380,7 +1380,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇷🇺 Aeza Group — #99'
@@ -1394,7 +1393,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇷🇺 Aeza Group — #100'
@@ -1408,7 +1406,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇷🇺 Aeza Group — #101'
@@ -1422,7 +1419,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇷🇺 Aeza Group — #102'
@@ -2065,7 +2061,6 @@ proxies:
   servername: bunny.net
   reality-opts:
     public-key: 92bt1gYq9EAz3SSOtKDrmqnbetNcaStEDicwrFg0_Rc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇷🇺 Timeweb — #148'
@@ -2450,7 +2445,6 @@ proxies:
   servername: test.spectrum.vu
   reality-opts:
     public-key: EyzTSZxq5qlUT2xW0l7VP-DzIh2ucabMan9ekEv9Owo
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #178'
@@ -2464,7 +2458,6 @@ proxies:
   servername: nspk.ru
   reality-opts:
     public-key: 0a3d38cwnQfUM7EqjEinf1XUZyKdzgiuRMayO3LcYl0
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #179'
@@ -2478,7 +2471,6 @@ proxies:
   servername: tele2.ru
   reality-opts:
     public-key: 0a3d38cwnQfUM7EqjEinf1XUZyKdzgiuRMayO3LcYl0
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #180'
@@ -2505,7 +2497,6 @@ proxies:
   servername: test.spectrum.vu
   reality-opts:
     public-key: EyzTSZxq5qlUT2xW0l7VP-DzIh2ucabMan9ekEv9Owo
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #182'
@@ -2533,7 +2524,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: 0a3d38cwnQfUM7EqjEinf1XUZyKdzgiuRMayO3LcYl0
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #184'
@@ -2547,7 +2537,6 @@ proxies:
   servername: max.ru
   reality-opts:
     public-key: 0a3d38cwnQfUM7EqjEinf1XUZyKdzgiuRMayO3LcYl0
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #185'
@@ -2561,7 +2550,6 @@ proxies:
   servername: api-maps.yandex.ru
   reality-opts:
     public-key: 0a3d38cwnQfUM7EqjEinf1XUZyKdzgiuRMayO3LcYl0
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #186'
@@ -2575,7 +2563,6 @@ proxies:
   servername: test.spectrum.vu
   reality-opts:
     public-key: EyzTSZxq5qlUT2xW0l7VP-DzIh2ucabMan9ekEv9Owo
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #187'
@@ -2589,7 +2576,6 @@ proxies:
   servername: max.ru
   reality-opts:
     public-key: 0a3d38cwnQfUM7EqjEinf1XUZyKdzgiuRMayO3LcYl0
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #188'
@@ -2629,7 +2615,6 @@ proxies:
   servername: api-maps.yandex.ru
   reality-opts:
     public-key: 0a3d38cwnQfUM7EqjEinf1XUZyKdzgiuRMayO3LcYl0
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #191'
@@ -2663,7 +2648,6 @@ proxies:
   servername: api-maps.yandex.ru
   reality-opts:
     public-key: 0a3d38cwnQfUM7EqjEinf1XUZyKdzgiuRMayO3LcYl0
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #194'
@@ -2761,7 +2745,6 @@ proxies:
   servername: stats.vk-portal.net
   reality-opts:
     public-key: YD5WWrYv-qy2P6Hu9dtImndERQBhf9uC928NigPOIjg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #201'
   type: vless
@@ -2788,7 +2771,6 @@ proxies:
   servername: stats.vk-portal.net
   reality-opts:
     public-key: YD5WWrYv-qy2P6Hu9dtImndERQBhf9uC928NigPOIjg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #203'
   type: vless
@@ -2841,7 +2823,6 @@ proxies:
   servername: bunny.net
   reality-opts:
     public-key: 92bt1gYq9EAz3SSOtKDrmqnbetNcaStEDicwrFg0_Rc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇪 Germany — #208'
@@ -2855,7 +2836,6 @@ proxies:
   servername: bunny.net
   reality-opts:
     public-key: 92bt1gYq9EAz3SSOtKDrmqnbetNcaStEDicwrFg0_Rc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇩🇰 Denmark — #209'
@@ -2883,7 +2863,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #211'
@@ -2953,7 +2932,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #216'
@@ -2967,7 +2945,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #217'
@@ -2981,7 +2958,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #218'
@@ -2995,7 +2971,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #219'
@@ -3009,7 +2984,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #220'
   type: vless
@@ -3022,7 +2996,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #221'
@@ -3036,7 +3009,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #222'
@@ -3064,7 +3036,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #224'
   type: vless
@@ -3077,7 +3048,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #225'
   type: vless
@@ -3090,7 +3060,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #226'
   type: vless
@@ -3103,7 +3072,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #227'
@@ -3131,7 +3099,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #229'
@@ -3145,7 +3112,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #230'
   type: vless
@@ -3158,7 +3124,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #231'
   type: vless
@@ -3171,7 +3136,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #232'
   type: vless
@@ -3184,7 +3148,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #233'
   type: vless
@@ -3197,7 +3160,6 @@ proxies:
   servername: eh.vk.ru
   reality-opts:
     public-key: wSQIBnAc0cYO9JitaNcgZ2LwkTix0_dXVpDjnZxDrCE
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #234'
   type: vless
@@ -3224,7 +3186,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #236'
   type: vless
@@ -3237,7 +3198,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: KoqFmkUAjNqUXiAjD4Oz3hETRQb_-ygys14EgJsmeSY
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #237'
   type: vless
@@ -3264,7 +3224,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: KoqFmkUAjNqUXiAjD4Oz3hETRQb_-ygys14EgJsmeSY
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #239'
   type: vless
@@ -3277,7 +3236,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #240'
   type: vless
@@ -3290,7 +3248,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #241'
   type: vless
@@ -3303,7 +3260,6 @@ proxies:
   servername: eh.vk.ru
   reality-opts:
     public-key: wSQIBnAc0cYO9JitaNcgZ2LwkTix0_dXVpDjnZxDrCE
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #242'
   type: vless
@@ -3316,7 +3272,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #243'
   type: vless
@@ -3329,7 +3284,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #244'
   type: vless
@@ -3342,7 +3296,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #245'
   type: vless
@@ -3355,7 +3308,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #246'
   type: vless
@@ -3368,7 +3320,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #247'
   type: vless
@@ -3381,7 +3332,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #248'
   type: vless
@@ -3394,7 +3344,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #249'
   type: vless
@@ -3407,7 +3356,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #250'
   type: vless
@@ -3420,7 +3368,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #251'
   type: vless
@@ -3433,7 +3380,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #252'
   type: vless
@@ -3446,7 +3392,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #253'
   type: vless
@@ -3459,7 +3404,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #254'
   type: vless
@@ -3472,7 +3416,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #255'
   type: vless
@@ -3485,7 +3428,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #256'
   type: vless
@@ -3498,7 +3440,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #257'
   type: vless
@@ -3511,7 +3452,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #258'
   type: vless
@@ -3524,7 +3464,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #259'
   type: vless
@@ -3537,7 +3476,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia — #260'
   type: vless
@@ -3550,7 +3488,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: JmO_njtIe9q7HRanm_dx4BtPAGCkycJuDskOISPx_Sg
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇪🇸 Spain — #261'
   type: vless
@@ -6118,7 +6055,6 @@ proxies:
   servername: bunny.net
   reality-opts:
     public-key: 92bt1gYq9EAz3SSOtKDrmqnbetNcaStEDicwrFg0_Rc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇱🇻 Latvia — #445'
@@ -6749,7 +6685,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: YBKQqcPbFlOY4Yw-DUUldDBQ0PZwq9Ergd-YbRHzy2I
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇳🇱 The Netherlands — #494'
@@ -6777,7 +6712,6 @@ proxies:
   servername: st.okcdn.ru
   reality-opts:
     public-key: wSQIBnAc0cYO9JitaNcgZ2LwkTix0_dXVpDjnZxDrCE
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇳🇱 The Netherlands — #496'
   type: vless
@@ -6804,7 +6738,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: YBKQqcPbFlOY4Yw-DUUldDBQ0PZwq9Ergd-YbRHzy2I
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇳🇱 The Netherlands — #498'
@@ -6818,7 +6751,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: YBKQqcPbFlOY4Yw-DUUldDBQ0PZwq9Ergd-YbRHzy2I
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇳🇱 The Netherlands — #499'
@@ -6970,7 +6902,6 @@ proxies:
   servername: proxy.darknet.run
   reality-opts:
     public-key: CwmIRtPbbb0VDHYxHTiDxF1xtVDG4Jr90RJZvCKQzXQ
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇳🇱 The Netherlands — #510'
@@ -7012,7 +6943,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: YBKQqcPbFlOY4Yw-DUUldDBQ0PZwq9Ergd-YbRHzy2I
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇳🇱 The Netherlands — #513'
@@ -7026,7 +6956,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: YBKQqcPbFlOY4Yw-DUUldDBQ0PZwq9Ergd-YbRHzy2I
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇳🇱 The Netherlands — #514'
@@ -7040,7 +6969,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: YBKQqcPbFlOY4Yw-DUUldDBQ0PZwq9Ergd-YbRHzy2I
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇳🇱 The Netherlands — #515'
@@ -7068,7 +6996,6 @@ proxies:
   servername: node5.telegavpn.org
   reality-opts:
     public-key: WvNaAxI0W__qfUKbtysH4IwF155YENlv3PG6crCmPkA
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇳🇱 The Netherlands — #517'
@@ -7082,7 +7009,6 @@ proxies:
   servername: node5.telegavpn.org
   reality-opts:
     public-key: WvNaAxI0W__qfUKbtysH4IwF155YENlv3PG6crCmPkA
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇳🇱 The Netherlands — #518'
@@ -7096,7 +7022,6 @@ proxies:
   servername: node5.telegavpn.org
   reality-opts:
     public-key: WvNaAxI0W__qfUKbtysH4IwF155YENlv3PG6crCmPkA
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇳🇱 The Netherlands — #519'
@@ -7456,7 +7381,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇵🇱 Poland — #546'
@@ -7889,7 +7813,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇵🇱 Poland — #577'
@@ -8197,7 +8120,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇵🇱 Poland — #599'
@@ -8211,7 +8133,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇵🇱 Poland — #600'
@@ -8491,7 +8412,6 @@ proxies:
   servername: ads.x5.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   flow: xtls-rprx-vision
   client-fingerprint: chrome
 - name: '🇵🇱 Poland — #620'
@@ -8603,7 +8523,6 @@ proxies:
   servername: eh.vk.ru
   reality-opts:
     public-key: wSQIBnAc0cYO9JitaNcgZ2LwkTix0_dXVpDjnZxDrCE
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇵🇱 Poland — #630'
   type: vless
@@ -8644,7 +8563,6 @@ proxies:
   servername: eh.vk.ru
   reality-opts:
     public-key: wSQIBnAc0cYO9JitaNcgZ2LwkTix0_dXVpDjnZxDrCE
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇵🇱 Poland — #635'
   type: vless
@@ -9971,7 +9889,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #733'
   type: vless
@@ -9984,7 +9901,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #734'
   type: vless
@@ -9997,7 +9913,6 @@ proxies:
   servername: api.avito.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #735'
   type: vless
@@ -10038,7 +9953,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #738'
   type: vless
@@ -10051,7 +9965,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #739'
   type: vless
@@ -10064,7 +9977,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #740'
   type: vless
@@ -10077,7 +9989,6 @@ proxies:
   servername: api.avito.ru
   reality-opts:
     public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #741'
   type: vless
@@ -10090,7 +10001,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #742'
   type: vless
@@ -10103,7 +10013,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #743'
   type: vless
@@ -10116,7 +10025,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #744'
   type: vless
@@ -10129,7 +10037,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #745'
   type: vless
@@ -10142,7 +10049,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #746'
   type: vless
@@ -10155,7 +10061,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #747'
   type: vless
@@ -10168,7 +10073,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #748'
   type: vless
@@ -10181,7 +10085,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #749'
   type: vless
@@ -10194,7 +10097,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 - name: '🇺🇸 United States — #750'
   type: vless
@@ -10207,7 +10109,6 @@ proxies:
   servername: 01.img.avito.st
   reality-opts:
     public-key: 8Wb7DfK3p97KYIBDUxTZRHkG8PomTfA28gJ2qdFA808
-    short-id: ''
   client-fingerprint: chrome
 proxy-groups:
 - name: PROXY
