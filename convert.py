@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Автоматический конвертер VLESS → Clash YAML
-ФИНАЛЬНАЯ ВЕРСИЯ с фиксом пустого short-id
+РАДИКАЛЬНЫЙ ФИКС - пропускаем серверы с ПУСТЫМ short-id
 """
 
 import urllib.parse
@@ -42,13 +41,14 @@ def parse_vless_url(vless_url):
         return None
 
 def is_valid_short_id(sid):
-    """Строгая проверка short-id для REALITY"""
-    if not sid:
-        return True  # Пустой валиден
+    """СУПЕР-СТРОГАЯ проверка short-id"""
+    # ПУСТОЙ = НЕВАЛИДНЫЙ! ПРОПУСКАЕМ!
+    if not sid or not sid.strip():
+        return False  # ← ИЗМЕНЕНО! Пустой = невалидный!
     
     sid = sid.strip()
     
-    # ТОЛЬКО hex символы (0-9, a-f, A-F)
+    # ТОЛЬКО hex символы
     if not re.match(r'^[0-9a-fA-F]+$', sid):
         return False
     
@@ -59,17 +59,18 @@ def is_valid_short_id(sid):
     return True
 
 def vless_to_clash_proxy(vless_params):
-    """Конвертирует VLESS в Clash, возвращает None если невалидный"""
+    """Конвертирует VLESS в Clash, пропускает битые"""
     try:
         security = vless_params.get('security', '')
         
-        # КРИТИЧЕСКАЯ ВАЛИДАЦИЯ ДЛЯ REALITY
         if security == 'reality':
             sid = vless_params.get('sid', '')
             
-            # Если short-id битый - ПРОПУСКАЕМ весь сервер!
+            # РАДИКАЛЬНАЯ ВАЛИДАЦИЯ:
+            # Если short-id ПУСТОЙ или БИТЫЙ - ПРОПУСКАЕМ!
             if not is_valid_short_id(sid):
-                print(f"⚠️  SKIP: {vless_params['name'][:60]} | invalid sid: '{sid}'")
+                name_short = vless_params['name'][:60]
+                print(f"⚠️  SKIP: {name_short} | sid='{sid}' (пустой или битый)")
                 return None
         
         proxy = {
@@ -88,17 +89,11 @@ def vless_to_clash_proxy(vless_params):
             
             sid = vless_params.get('sid', '').strip()
             
-            # КРИТИЧЕСКИЙ ФИКС: Создаем reality-opts
-            reality_opts = {
+            # Добавляем short-id (он уже валидирован выше)
+            proxy['reality-opts'] = {
                 'public-key': vless_params.get('pbk', ''),
+                'short-id': sid,
             }
-            
-            # Добавляем short-id ТОЛЬКО если он НЕ пустой!
-            # Пустой short-id вообще не добавляем в конфиг!
-            if sid:
-                reality_opts['short-id'] = sid
-            
-            proxy['reality-opts'] = reality_opts
             
             flow = vless_params.get('flow', '')
             if flow:
@@ -115,7 +110,6 @@ def vless_to_clash_proxy(vless_params):
         return None
 
 def is_russia(name):
-    """Проверяет российский ли сервер"""
     ru_keywords = [
         '🇷🇺', 'RUSSIA', 'RU', 'РФ', 
         'VK', 'YANDEX', 'SELECTEL', 'BEGET', 'DELTA', 
@@ -126,26 +120,22 @@ def is_russia(name):
     return any(kw in name_upper for kw in ru_keywords)
 
 def is_germany(name):
-    """Проверяет немецкий ли сервер (БЕЗ российских!)"""
     de_keywords = ['🇩🇪', 'GERMANY', 'DEUTSCHLAND', 'FRANKFURT', 
                    'BERLIN', 'MUNICH', 'HETZNER', 'NUREMBERG']
     name_upper = name.upper()
     return any(kw in name_upper for kw in de_keywords) and not is_russia(name)
 
 def is_poland(name):
-    """Проверяет польский ли сервер (БЕЗ российских!)"""
     pl_keywords = ['🇵🇱', 'POLAND', 'POLSKA', 'WARSAW', 'KRAKOW']
     name_upper = name.upper()
     return any(kw in name_upper for kw in pl_keywords) and not is_russia(name)
 
 def is_estonia(name):
-    """Проверяет эстонский ли сервер (БЕЗ российских!)"""
     ee_keywords = ['🇪🇪', 'ESTONIA', 'EESTI', 'TALLINN']
     name_upper = name.upper()
     return any(kw in name_upper for kw in ee_keywords) and not is_russia(name)
 
 def is_hungary(name):
-    """Проверяет венгерский ли сервер (БЕЗ российских!)"""
     hu_keywords = ['🇭🇺', 'HUNGARY', 'MAGYAR', 'BUDAPEST']
     name_upper = name.upper()
     return any(kw in name_upper for kw in hu_keywords) and not is_russia(name)
@@ -169,8 +159,8 @@ def convert_vless_to_clash():
         print("❌ Не найдено валидных VLESS конфигураций!")
         return
     
-    # Конвертация с ВАЛИДАЦИЕЙ
-    print("🔍 Валидация и конвертация...")
+    # Конвертация с РАДИКАЛЬНОЙ валидацией
+    print("🔍 Валидация (пропускаем пустые short-id)...")
     clash_proxies = []
     skipped = 0
     
@@ -182,7 +172,7 @@ def convert_vless_to_clash():
             skipped += 1
     
     print(f"✅ Валидных прокси: {len(clash_proxies)}")
-    print(f"⚠️  Пропущено битых: {skipped}")
+    print(f"⚠️  Пропущено: {skipped}")
     
     if len(clash_proxies) == 0:
         print("❌ НЕТ валидных прокси!")
@@ -231,7 +221,7 @@ def convert_vless_to_clash():
     estonia_names = [p['name'] for p in clash_proxies if is_estonia(p['name'])]
     hungary_names = [p['name'] for p in clash_proxies if is_hungary(p['name'])]
     
-    # Фолбэки если стран нет
+    # Фолбэки
     if not germany_names:
         germany_names = non_russian_names[:30] if non_russian_names else proxy_names[:30]
     if not poland_names:
@@ -343,7 +333,7 @@ def convert_vless_to_clash():
         yaml.dump(clash_config, f, allow_unicode=True, default_flow_style=False, sort_keys=False)
     
     print(f"💾 Сохранено: clash_config.yaml")
-    print(f"🔧 ФИКС: Пустой short-id НЕ добавляется в конфиг!")
+    print(f"🔥 РАДИКАЛЬНЫЙ ФИКС: Пустые short-id УДАЛЕНЫ!")
     print(f"✅ ГОТОВО!")
 
 if __name__ == "__main__":
