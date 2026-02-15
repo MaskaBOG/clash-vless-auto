@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-РАДИКАЛЬНЫЙ ФИКС - полностью пропускаем серверы с невалидным short-id
+Автоматический конвертер VLESS → Clash YAML
+С валидацией short-id и исключением RU из EU групп
 """
 
 import urllib.parse
@@ -41,33 +42,34 @@ def parse_vless_url(vless_url):
         return None
 
 def is_valid_short_id(sid):
-    """Строгая проверка short-id"""
+    """Строгая проверка short-id для REALITY"""
     if not sid:
         return True  # Пустой валиден
     
     sid = sid.strip()
     
-    # ДОЛЖЕН быть только hex (0-9, a-f, A-F)
+    # ТОЛЬКО hex символы (0-9, a-f, A-F)
     if not re.match(r'^[0-9a-fA-F]+$', sid):
         return False
     
-    # ДОЛЖЕН быть <= 16 символов
+    # Максимум 16 символов
     if len(sid) > 16:
         return False
     
     return True
 
 def vless_to_clash_proxy(vless_params):
-    """Конвертирует VLESS в Clash формат, возвращает None если невалидный"""
+    """Конвертирует VLESS в Clash, возвращает None если невалидный"""
     try:
-        # КРИТИЧЕСКАЯ ПРОВЕРКА ДЛЯ REALITY
         security = vless_params.get('security', '')
+        
+        # КРИТИЧЕСКАЯ ВАЛИДАЦИЯ ДЛЯ REALITY
         if security == 'reality':
             sid = vless_params.get('sid', '')
             
-            # ЕСЛИ SHORT-ID НЕВАЛИДНЫЙ - ПРОПУСКАЕМ ВЕСЬ ПРОКСИ!
+            # Если short-id битый - ПРОПУСКАЕМ весь сервер!
             if not is_valid_short_id(sid):
-                print(f"⚠️  ПРОПУСК: {vless_params['name'][:50]} - невалидный short-id: '{sid}'")
+                print(f"⚠️  SKIP: {vless_params['name'][:60]} | invalid sid: '{sid}'")
                 return None
         
         proxy = {
@@ -88,7 +90,7 @@ def vless_to_clash_proxy(vless_params):
             
             proxy['reality-opts'] = {
                 'public-key': vless_params.get('pbk', ''),
-                'short-id': sid,  # Используем как есть (уже проверен)
+                'short-id': sid,
             }
             
             flow = vless_params.get('flow', '')
@@ -102,10 +104,11 @@ def vless_to_clash_proxy(vless_params):
         return proxy
         
     except Exception as e:
-        print(f"❌ Ошибка конвертации {vless_params.get('name', 'unknown')}: {e}")
+        print(f"❌ Error: {vless_params.get('name', 'unknown')}: {e}")
         return None
 
 def is_russia(name):
+    """Проверяет российский ли сервер"""
     ru_keywords = [
         '🇷🇺', 'RUSSIA', 'RU', 'РФ', 
         'VK', 'YANDEX', 'SELECTEL', 'BEGET', 'DELTA', 
@@ -116,22 +119,26 @@ def is_russia(name):
     return any(kw in name_upper for kw in ru_keywords)
 
 def is_germany(name):
+    """Проверяет немецкий ли сервер (БЕЗ российских!)"""
     de_keywords = ['🇩🇪', 'GERMANY', 'DEUTSCHLAND', 'FRANKFURT', 
                    'BERLIN', 'MUNICH', 'HETZNER', 'NUREMBERG']
     name_upper = name.upper()
     return any(kw in name_upper for kw in de_keywords) and not is_russia(name)
 
 def is_poland(name):
+    """Проверяет польский ли сервер (БЕЗ российских!)"""
     pl_keywords = ['🇵🇱', 'POLAND', 'POLSKA', 'WARSAW', 'KRAKOW']
     name_upper = name.upper()
     return any(kw in name_upper for kw in pl_keywords) and not is_russia(name)
 
 def is_estonia(name):
+    """Проверяет эстонский ли сервер (БЕЗ российских!)"""
     ee_keywords = ['🇪🇪', 'ESTONIA', 'EESTI', 'TALLINN']
     name_upper = name.upper()
     return any(kw in name_upper for kw in ee_keywords) and not is_russia(name)
 
 def is_hungary(name):
+    """Проверяет венгерский ли сервер (БЕЗ российских!)"""
     hu_keywords = ['🇭🇺', 'HUNGARY', 'MAGYAR', 'BUDAPEST']
     name_upper = name.upper()
     return any(kw in name_upper for kw in hu_keywords) and not is_russia(name)
@@ -142,7 +149,6 @@ def convert_vless_to_clash():
         lines = f.readlines()
     
     vless_configs = []
-    
     for line in lines:
         line = line.strip()
         if line.startswith('vless://'):
@@ -150,32 +156,32 @@ def convert_vless_to_clash():
             if params:
                 vless_configs.append(params)
     
-    print(f"📋 Всего конфигов в файле: {len(vless_configs)}")
+    print(f"📋 Всего конфигов: {len(vless_configs)}")
     
     if not vless_configs:
         print("❌ Не найдено валидных VLESS конфигураций!")
         return
     
-    # Конвертируем - СТРОГАЯ ВАЛИДАЦИЯ
-    print("🔍 Проверяю и конвертирую конфиги...")
+    # Конвертация с ВАЛИДАЦИЕЙ
+    print("🔍 Валидация и конвертация...")
     clash_proxies = []
-    skipped_count = 0
+    skipped = 0
     
     for params in vless_configs:
         proxy = vless_to_clash_proxy(params)
         if proxy:
             clash_proxies.append(proxy)
         else:
-            skipped_count += 1
+            skipped += 1
     
     print(f"✅ Валидных прокси: {len(clash_proxies)}")
-    print(f"⚠️  Пропущено битых: {skipped_count}")
+    print(f"⚠️  Пропущено битых: {skipped}")
     
     if len(clash_proxies) == 0:
-        print("❌ НЕТ валидных прокси после фильтрации!")
+        print("❌ НЕТ валидных прокси!")
         return
     
-    # Классификация по странам
+    # Классификация
     russian_configs = []
     non_russian_configs = []
     germany_configs = []
@@ -218,7 +224,7 @@ def convert_vless_to_clash():
     estonia_names = [p['name'] for p in clash_proxies if is_estonia(p['name'])]
     hungary_names = [p['name'] for p in clash_proxies if is_hungary(p['name'])]
     
-    # Фолбэки
+    # Фолбэки если стран нет
     if not germany_names:
         germany_names = non_russian_names[:30] if non_russian_names else proxy_names[:30]
     if not poland_names:
@@ -329,11 +335,8 @@ def convert_vless_to_clash():
     with open('clash_config.yaml', 'w', encoding='utf-8') as f:
         yaml.dump(clash_config, f, allow_unicode=True, default_flow_style=False, sort_keys=False)
     
-    print(f"💾 Сохранено в clash_config.yaml")
-    print(f"🎯 РАДИКАЛЬНАЯ ВАЛИДАЦИЯ:")
-    print(f"   ✅ Битые short-id → ПОЛНОСТЬЮ ПРОПУСКАЮТСЯ")
-    print(f"   ✅ В конфиг попадают ТОЛЬКО 100% валидные прокси")
-    print(f"   ✅ Гарантия: НЕТ ошибок при загрузке!")
+    print(f"💾 Сохранено: clash_config.yaml")
+    print(f"✅ ГОТОВО!")
 
 if __name__ == "__main__":
     convert_vless_to_clash()
