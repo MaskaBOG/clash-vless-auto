@@ -14118,7 +14118,7 @@ proxy-groups:
   - '🇷🇺 VK — #29'
   - '🇷🇺 VK — #30'
 - name: 🚀 Авто
-  type: fallback
+  type: url-test
   proxies:
   - '🇷🇺 VK — #1'
   - '🇷🇺 VK — #2'
@@ -15148,9 +15148,10 @@ proxy-groups:
   - '🇺🇸 United States — #1026'
   - '🇺🇸 United States — #1027'
   url: https://www.google.com/generate_204
-  interval: 30
+  interval: 60
+  tolerance: 100
 - name: 📺 YouTube
-  type: fallback
+  type: url-test
   proxies:
   - '🇦🇪 United Arab Emirates — #228'
   - '🇦🇪 United Arab Emirates — #229'
@@ -15953,9 +15954,10 @@ proxy-groups:
   - '🇺🇸 United States — #1026'
   - '🇺🇸 United States — #1027'
   url: https://www.youtube.com/generate_204
-  interval: 60
+  interval: 120
+  tolerance: 150
 - name: 🎮 League
-  type: fallback
+  type: url-test
   proxies: &id001
   - '🇷🇺 VK — #1'
   - '🇷🇺 VK — #2'
@@ -16185,134 +16187,11 @@ proxy-groups:
   - '🇷🇺 Timeweb — #226'
   - '🇷🇺 Timeweb — #227'
   url: https://www.google.com/generate_204
-  interval: 30
+  interval: 60
+  tolerance: 30
 - name: 🇩🇪 Frankfurt
-  type: fallback
+  type: url-test
   proxies:
-  - '🇷🇺 Yandex — #34'
-  - '🇷🇺 Yandex — #35'
-  - '🇷🇺 Yandex — #36'
-  - '🇷🇺 Yandex — #37'
-  - '🇷🇺 Yandex — #38'
-  - '🇷🇺 Yandex — #39'
-  - '🇷🇺 Yandex — #40'
-  - '🇷🇺 Yandex — #41'
-  - '🇷🇺 Yandex — #42'
-  - '🇷🇺 Yandex — #43'
-  - '🇷🇺 Yandex — #44'
-  - '🇷🇺 Yandex — #45'
-  - '🇷🇺 Yandex — #46'
-  - '🇷🇺 Yandex — #47'
-  - '🇷🇺 Yandex — #48'
-  - '🇷🇺 Yandex — #49'
-  - '🇷🇺 Yandex — #50'
-  - '🇷🇺 Yandex — #51'
-  - '🇷🇺 Yandex — #52'
-  - '🇷🇺 Yandex — #53'
-  - '🇷🇺 Yandex — #54'
-  - '🇷🇺 Yandex — #55'
-  - '🇷🇺 Yandex — #56'
-  - '🇷🇺 Yandex — #57'
-  - '🇷🇺 Yandex — #58'
-  - '🇷🇺 Yandex — #59'
-  - '🇷🇺 Yandex — #60'
-  - '🇷🇺 Yandex — #61'
-  - '🇷🇺 Yandex — #62'
-  - '🇷🇺 Yandex — #63'
-  - '🇷🇺 Yandex — #64'
-  - '🇷🇺 Yandex — #65'
-  - '🇷🇺 Yandex — #66'
-  - '🇷🇺 Yandex — #67'
-  - '🇷🇺 Yandex — #68'
-  - '🇷🇺 Yandex — #69'
-  - '🇷🇺 Yandex — #70'
-  - '🇷🇺 Yandex — #71'
-  - '🇷🇺 Yandex — #72'
-  - '🇷🇺 Yandex — #73'
-  - '🇷🇺 Yandex — #74'
-  - '🇷🇺 Yandex — #75'
-  - '🇷🇺 Yandex — #76'
-  - '🇷🇺 Yandex — #77'
-  - '🇷🇺 Yandex — #78'
-  - '🇷🇺 Yandex — #79'
-  - '🇷🇺 Yandex — #80'
-  - '🇷🇺 Yandex — #81'
-  - '🇷🇺 Yandex — #82'
-  - '🇷🇺 Yandex — #83'
-  - '🇷🇺 Yandex — #84'
-  - '🇷🇺 Yandex — #85'
-  - '🇷🇺 Yandex — #86'
-  - '🇷🇺 Yandex — #87'
-  - '🇷🇺 Yandex — #88'
-  - '🇷🇺 Yandex — #89'
-  - '🇷🇺 Yandex — #90'
-  - '🇷🇺 Yandex — #91'
-  - '🇷🇺 Yandex — #92'
-  - '🇷🇺 Yandex — #93'
-  - '🇷🇺 Yandex — #94'
-  - '🇷🇺 Yandex — #95'
-  - '🇷🇺 Yandex — #96'
-  - '🇷🇺 Yandex — #97'
-  - '🇷🇺 Yandex — #98'
-  - '🇷🇺 Yandex — #99'
-  - '🇷🇺 Yandex — #100'
-  - '🇷🇺 Yandex — #101'
-  - '🇷🇺 Yandex — #102'
-  - '🇷🇺 Yandex — #103'
-  - '🇷🇺 Yandex — #104'
-  - '🇷🇺 Yandex — #105'
-  - '🇷🇺 Yandex — #106'
-  - '🇷🇺 Yandex — #107'
-  - '🇷🇺 Yandex — #108'
-  - '🇷🇺 Yandex — #109'
-  - '🇷🇺 Yandex — #110'
-  - '🇷🇺 Yandex — #111'
-  - '🇷🇺 Yandex — #112'
-  - '🇷🇺 Yandex — #113'
-  - '🇷🇺 Yandex — #114'
-  - '🇷🇺 Yandex — #115'
-  - '🇷🇺 Yandex — #116'
-  - '🇷🇺 Yandex — #117'
-  - '🇷🇺 Yandex — #118'
-  - '🇷🇺 Yandex — #119'
-  - '🇷🇺 Yandex — #120'
-  - '🇷🇺 Yandex — #121'
-  - '🇷🇺 Yandex — #122'
-  - '🇷🇺 Yandex — #123'
-  - '🇷🇺 Yandex — #124'
-  - '🇷🇺 Yandex — #125'
-  - '🇷🇺 Yandex — #126'
-  - '🇷🇺 Yandex — #127'
-  - '🇷🇺 Yandex — #128'
-  - '🇷🇺 Yandex — #129'
-  - '🇷🇺 Yandex — #130'
-  - '🇷🇺 Yandex — #131'
-  - '🇷🇺 Yandex — #132'
-  - '🇷🇺 Yandex — #133'
-  - '🇷🇺 Yandex — #134'
-  - '🇷🇺 Yandex — #135'
-  - '🇷🇺 Yandex — #136'
-  - '🇷🇺 Yandex — #137'
-  - '🇷🇺 Yandex — #138'
-  - '🇷🇺 Yandex — #139'
-  - '🇷🇺 Yandex — #140'
-  - '🇷🇺 Yandex — #141'
-  - '🇷🇺 CDNvideo — #155'
-  - '🇷🇺 CDNvideo — #156'
-  - '🇷🇺 CDNvideo — #157'
-  - '🇷🇺 CDNvideo — #158'
-  - '🇷🇺 CDNvideo — #159'
-  - '🇷🇺 CDNvideo — #160'
-  - '🇷🇺 CDNvideo — #161'
-  - '🇷🇺 CDNvideo — #162'
-  - '🇷🇺 CDNvideo — #163'
-  - '🇷🇺 CDNvideo — #164'
-  - '🇷🇺 CDNvideo — #165'
-  - '🇷🇺 CDNvideo — #166'
-  - '🇷🇺 Delta — #169'
-  - '🇷🇺 Delta — #170'
-  - '🇷🇺 Delta — #171'
-  - '🇷🇺 Delta — #172'
   - '🇩🇪 Germany — #259'
   - '🇩🇪 Germany — #260'
   - '🇩🇪 Germany — #261'
@@ -16354,21 +16233,11 @@ proxy-groups:
   - '🇩🇪 Germany — #297'
   - '🇩🇪 Germany — #298'
   - '🇩🇪 Germany — #299'
-  - '🇸🇪 Sweden — #903'
-  - '🇸🇪 Sweden — #904'
-  - '🇸🇪 Sweden — #905'
-  - '🇸🇪 Sweden — #906'
-  - '🇸🇪 Sweden — #907'
-  - '🇸🇪 Sweden — #908'
-  - '🇸🇪 Sweden — #909'
-  - '🇸🇪 Sweden — #910'
-  - '🇸🇪 Sweden — #911'
-  - '🇸🇪 Sweden — #912'
-  - '🇸🇪 Sweden — #913'
   url: https://cloudflare.com/cdn-cgi/trace
-  interval: 30
+  interval: 60
+  tolerance: 50
 - name: 🇵🇱 Polska
-  type: fallback
+  type: url-test
   proxies:
   - '🇵🇱 Poland — #758'
   - '🇵🇱 Poland — #759'
@@ -16516,9 +16385,10 @@ proxy-groups:
   - '🇵🇱 Poland — #901'
   - '🇵🇱 Poland — #902'
   url: https://cloudflare.com/cdn-cgi/trace
-  interval: 30
+  interval: 60
+  tolerance: 50
 - name: 🇪🇪 Eesti
-  type: fallback
+  type: url-test
   proxies:
   - '🇪🇪 Estonia — #300'
   - '🇪🇪 Estonia — #301'
@@ -16592,9 +16462,10 @@ proxy-groups:
   - '🇪🇪 Estonia — #369'
   - '🇪🇪 Estonia — #370'
   url: https://cloudflare.com/cdn-cgi/trace
-  interval: 30
+  interval: 60
+  tolerance: 50
 - name: 🇭🇺 Hungary
-  type: fallback
+  type: url-test
   proxies:
   - '🇭🇺 Hungary — #501'
   - '🇭🇺 Hungary — #502'
@@ -16677,15 +16548,15 @@ proxy-groups:
   - '🇭🇺 Hungary — #579'
   - '🇭🇺 Hungary — #580'
   - '🇭🇺 Hungary — #581'
-  - '🇱🇹 Lithuania — #662'
-  - '🇱🇹 Lithuania — #663'
   url: https://cloudflare.com/cdn-cgi/trace
-  interval: 30
+  interval: 60
+  tolerance: 50
 - name: ⚡ Российские
-  type: fallback
+  type: url-test
   proxies: *id001
   url: https://yandex.ru/internet
-  interval: 30
+  interval: 60
+  tolerance: 30
 rules:
 - DOMAIN-SUFFIX,youtube.com,📺 YouTube
 - DOMAIN-SUFFIX,googlevideo.com,📺 YouTube
