@@ -4,9 +4,6 @@ on:
   schedule:
     - cron: '0 * * * *'  # Каждый час
   workflow_dispatch:  # Ручной запуск
-  push:
-    branches:
-      - main
 
 permissions:
   contents: write
@@ -19,7 +16,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # Полная история
+          persist-credentials: true  # ← КРИТИЧНО!
+          token: ${{ github.token }}  # ← Используем встроенный токен
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -40,8 +39,11 @@ jobs:
       
       - name: Commit and push if changed
         run: |
-          git config --global user.name 'GitHub Actions Bot'
-          git config --global user.email 'actions@github.com'
+          # Настраиваем Git
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Добавляем файл
           git add clash_config.yaml
           
           # Проверяем есть ли изменения
@@ -51,13 +53,9 @@ jobs:
           fi
           
           # Коммитим
-          git commit -m "🤖 Auto-update: $(date '+%Y-%m-%d %H:%M UTC')"
+          git commit -m "🤖 Auto-update: $(date -u '+%Y-%m-%d %H:%M UTC')"
           
-          # Пушим (БЕЗ pull - конфликтов не может быть!)
-          git push || {
-            echo "⚠️ Push failed, trying to pull first..."
-            git pull --rebase --autostash
-            git push
-          }
+          # Пушим
+          git push
           
           echo "✅ Successfully updated clash_config.yaml"
