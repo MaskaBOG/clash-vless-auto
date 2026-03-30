@@ -1,4 +1,4 @@
-name: Convert VLESS to Clash YAML
+name: Convert VLESS to Clash YAML and NekoBox
 
 on:
   schedule:
@@ -16,9 +16,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Полная история
-          persist-credentials: true  # ← КРИТИЧНО!
-          token: ${{ github.token }}  # ← Используем встроенный токен
+          fetch-depth: 0
+          persist-credentials: true
+          token: ${{ github.token }}
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -36,15 +36,20 @@ jobs:
       - name: Convert to Clash YAML
         run: |
           python convert.py
+          echo "✅ Clash YAML created"
+      
+      - name: Convert to NekoBox format
+        run: |
+          python convert_nekobox.py
+          echo "✅ NekoBox subscription created"
       
       - name: Commit and push if changed
         run: |
-          # Настраиваем Git
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Добавляем файл
-          git add clash_config.yaml
+          # Добавляем оба файла
+          git add clash_config.yaml nekobox_subscription.txt
           
           # Проверяем есть ли изменения
           if git diff --staged --quiet; then
@@ -58,4 +63,4 @@ jobs:
           # Пушим
           git push
           
-          echo "✅ Successfully updated clash_config.yaml"
+          echo "✅ Successfully updated both files"
