@@ -1,15 +1,15 @@
-name: Convert VLESS to Clash YAML and NekoBox
+name: Update Durev VPN Subscription
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Каждый час
+    - cron: '0 */6 * * *'  # Каждые 6 часов
   workflow_dispatch:  # Ручной запуск
 
 permissions:
   contents: write
 
 jobs:
-  convert:
+  update:
     runs-on: ubuntu-latest
     
     steps:
@@ -29,38 +29,23 @@ jobs:
         run: |
           pip install pyyaml requests
       
-      - name: Download VLESS configs
+      - name: Convert Durev subscription
         run: |
-          curl -o vless_lite.txt https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
-      
-      - name: Convert to Clash YAML
-        run: |
-          python convert.py
-          echo "✅ Clash YAML created"
-      
-      - name: Convert to NekoBox format
-        run: |
-          python convert_nekobox.py
-          echo "✅ NekoBox subscription created"
+          python convert_durev.py
       
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Добавляем оба файла
-          git add clash_config.yaml nekobox_subscription.txt
+          git add clash_config.yaml
           
-          # Проверяем есть ли изменения
           if git diff --staged --quiet; then
-            echo "✅ No changes to commit"
+            echo "✅ No changes"
             exit 0
           fi
           
-          # Коммитим
-          git commit -m "🤖 Auto-update: $(date -u '+%Y-%m-%d %H:%M UTC')"
-          
-          # Пушим
+          git commit -m "🔄 Durev VPN update: $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
           
-          echo "✅ Successfully updated both files"
+          echo "✅ Updated successfully"
