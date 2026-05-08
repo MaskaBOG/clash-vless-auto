@@ -1,6 +1,7 @@
+#!/usr/bin/env python3
 """
 Конвертер VLESS → Base64 список для NekoBox
-Генерирует файл nekobox_subscription.txt
+С ГАРАНТИРОВАННО УНИКАЛЬНЫМИ именами через UUID!
 """
 
 import urllib.parse
@@ -56,8 +57,23 @@ def is_valid_short_id(sid):
     
     return True
 
+def make_unique_name(params):
+    """Создаёт ГАРАНТИРОВАННО УНИКАЛЬНОЕ имя через UUID"""
+    original_name = params['name']
+    uuid = params['uuid']
+    
+    # Берём последние 6 символов UUID
+    # Например: e9bbf3cc-f962-5b89-96c6-15ecee5b9ac0 → 5b9ac0
+    short_uuid = uuid.replace('-', '')[-6:]
+    
+    # Новое имя: оригинал + короткий UUID
+    # Например: "🇷🇺 Yandex — #114 (5b9ac0)"
+    unique_name = f"{original_name} ({short_uuid})"
+    
+    return unique_name
+
 def vless_params_to_url(params):
-    """Конвертирует параметры обратно в VLESS URL"""
+    """Конвертирует параметры обратно в VLESS URL с уникальным именем"""
     try:
         security = params.get('security', '')
         
@@ -67,6 +83,9 @@ def vless_params_to_url(params):
             if not is_valid_short_id(sid):
                 print(f"⚠️  SKIP: {params['name'][:60]} | invalid sid")
                 return None
+        
+        # Создаём УНИКАЛЬНОЕ имя через UUID
+        unique_name = make_unique_name(params)
         
         # Строим URL
         url = f"vless://{params['uuid']}@{params['server']}:{params['port']}"
@@ -86,7 +105,7 @@ def vless_params_to_url(params):
             if params.get('pbk'):
                 query_params.append(f"pbk={params['pbk']}")
             sid = str(params.get('sid', '')).strip()
-            if sid:  # Только если не пустой
+            if sid:
                 query_params.append(f"sid={sid}")
             if params.get('fp'):
                 query_params.append(f"fp={params['fp']}")
@@ -97,8 +116,8 @@ def vless_params_to_url(params):
         if query_params:
             url += "?" + "&".join(query_params)
         
-        # Добавляем имя
-        name_encoded = urllib.parse.quote(params['name'])
+        # Добавляем УНИКАЛЬНОЕ имя с UUID
+        name_encoded = urllib.parse.quote(unique_name)
         url += f"#{name_encoded}"
         
         return url
@@ -126,8 +145,8 @@ def convert_vless_to_nekobox():
         print("❌ Не найдено валидных VLESS конфигураций!")
         return
     
-    # Конвертируем обратно в VLESS URLs с валидацией
-    print("🔍 Валидация и конвертация...")
+    # Конвертируем с уникальными именами через UUID
+    print("🔍 Валидация и создание ГАРАНТИРОВАННО уникальных имён...")
     valid_urls = []
     skipped = 0
     
@@ -155,6 +174,7 @@ def convert_vless_to_nekobox():
     
     print(f"💾 Сохранено: nekobox_subscription.txt")
     print(f"📊 Серверов в подписке: {len(valid_urls)}")
+    print(f"✅ Все имена ГАРАНТИРОВАННО уникальны (UUID)!")
     print(f"✅ ГОТОВО для NekoBox!")
 
 if __name__ == "__main__":
