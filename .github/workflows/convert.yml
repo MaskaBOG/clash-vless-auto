@@ -1,4 +1,4 @@
-name: Convert VLESS to Clash YAML and NekoBox
+name: Update Free VLESS (Clash + NekoBox)
 
 on:
   schedule:
@@ -32,6 +32,7 @@ jobs:
       - name: Download VLESS configs
         run: |
           curl -o vless_lite.txt https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
+          echo "📥 Downloaded vless_lite.txt"
       
       - name: Convert to Clash YAML
         run: |
@@ -48,8 +49,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Добавляем оба файла
-          git add clash_config.yaml nekobox_subscription.txt
+          # Добавляем ВСЕ ФАЙЛЫ
+          git add clash_config.yaml nekobox_subscription.txt vless_lite.txt
           
           # Проверяем есть ли изменения
           if git diff --staged --quiet; then
@@ -63,4 +64,4 @@ jobs:
           # Пушим
           git push
           
-          echo "✅ Successfully updated both files"
+          echo "✅ Successfully updated all files"
