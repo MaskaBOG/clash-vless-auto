@@ -31,7 +31,7 @@ jobs:
       
       - name: Download VLESS configs
         run: |
-          curl -o vless_lite.txt https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
+          curl -o vless_lite.txt https://raw.githubusercontent.com/zieng2/wl/refs/heads/main/vless_lite.txt
           echo "📥 Downloaded vless_lite.txt"
       
       - name: Convert to Clash YAML
